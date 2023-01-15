@@ -1,0 +1,76 @@
+---
+import { Artist } from '../Types';
+
+export interface Props {
+	artist: Artist;
+}
+
+const { artist } = Astro.props;
+---
+
+
+<style>
+    img {
+        background-image: url({artist.imageSrc});
+        max-width: 5em;
+        max-height: 5em;
+        aspect-ratio: 1;
+        border-radius: 50%;
+        cursor: pointer;
+        filter: saturate(33%);
+        transition: 0.4s;
+    }
+
+    a {
+        transform: translateY(0);
+        transition: 0.5s;
+    }
+
+    @media screen and (max-width: 800px) {
+        img {
+            max-width: 3em;
+            max-height: 3em;
+        }
+
+        div {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: auto 10em;
+        }
+    }
+
+    a:hover > img {
+        filter: saturate(120%);
+        border: solid 3px #222222;
+        box-shadow: 0.25em 0.15em 0.5em rgba(0, 0, 0, 0.15);
+    }
+
+    a:hover {
+        transform: translateY(-0.75em);
+    }
+
+    div {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: auto 10em;
+    }
+
+    em {
+        text-align: center;
+        display: block;
+        margin-top: 0.5em;
+        transition: 0.5s;
+    }
+
+    a:hover > em {
+        transform: scale(1.05);
+    }
+</style>
+<div>
+    <a href={artist.youtubeLink} target="_blank">
+        <img src={artist.imageSrc} alt={artist.name}>
+        <em>{artist.name}</em>
+    </a>
+</div>

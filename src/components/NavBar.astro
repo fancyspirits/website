@@ -1,0 +1,105 @@
+---
+const pathname = new URL(Astro.request.url).pathname;
+const currentPath = pathname.slice(1);
+---
+<nav>
+    <ul>
+        <li>
+            <a href="/"><img src="favicon.svg" alt="FS" width="20"></a>
+        </li>
+        <li class={currentPath === "" ? "active" : ""}>
+            <a href="/"><p>Home</p></a>
+        </li>
+        <li class={currentPath === "artists" ? "active" : ""}>
+            <a href="/artists"><p>Artists</p></a>
+        </li>
+        <li class={currentPath === "releases" ? "active" : ""}>
+            <a href="/releases"><p>Releases</p></a>
+        </li>
+        <li class={currentPath === "demo" ? "active" : ""}>
+            <a href="/demo"><p>Submit Demo</p></a>
+        </li>
+    </ul>
+</nav>
+<style>
+    img {
+        filter: invert();
+        width: 2em;
+    }
+
+    li:hover img, li:hover.active {
+        transition: 0.5s;
+        filter: none;
+    }
+
+    nav {
+        height: 4rem;
+        background-color: black;
+        color: white;
+        z-index: 1000;
+        align-items: stretch;
+        overflow: hidden;
+    }
+
+    ul {
+        display: flex;
+        justify-content: center;
+        align-items: stretch;
+        height: 100%;
+    }
+
+    li {
+        transition: 0.5s;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+    }
+
+    li:hover, li.active {
+        background-color: #f9f9f9;
+        color: black;
+    }
+
+    li > a {
+        font-family: "IBM Plex Sans";
+        font-weight: 400;
+        height: 100%;
+        width: 100%;
+        padding: 1em 2em;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    li > a:hover {
+        font-weight: 600;
+    }
+
+    @media screen and (max-width: 1000px) and (min-width: 800px) {
+        li > a {
+            padding: 0.5em 1em;
+        }
+
+        nav {
+            height: 3.5rem;
+        }
+    }
+
+    @media screen and (max-width: 800px) {
+        li > a {
+            padding: 0.5em 1em;
+        }
+
+        li:first-child {
+            display: none;
+        }
+        
+        ul {
+            justify-content: flex-start;
+        }
+
+        nav {
+            height: 3.5rem;
+        }
+    }
+</style>

@@ -1,0 +1,81 @@
+---
+import { SocialLink } from '../Types';
+
+export interface Props {
+    links: SocialLink[];
+    class?: string;
+    before?: string;
+}
+
+const {class: className, before, links} = Astro.props;
+---
+<!-- <div class="wrap-social" class={className}> -->
+<div class:list={["wrap-social", className]}>
+    {before && <div class="mobile"><p>{before}: </p></div>}
+    <ul>
+        {before && <li><p>{before}: </p></li>}
+        {links.map(link => <li><a href={link.url} target="_blank"><img src={link.icon} alt={link.name} /></a></li>)}
+    </ul>
+</div>
+<style>
+    .wrap-social {
+        width: 100%;
+    }
+
+    ul {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        flex-wrap: nowrap;
+        width: 100%;
+    }
+
+    .mobile {
+        display: none;
+        font-weight: 700;
+        font-size: 1em;
+        margin-bottom: 1em;
+        width: 100%;
+    }
+
+    @media screen and (max-width: 800px) {
+        li p {
+            display: none;
+        }
+
+        .mobile {
+            display: block;
+        }
+    }
+
+    li:not(:first-child) {
+        margin-right: 1.5em;
+    }
+
+    li p {
+        font-weight: 700;
+        font-size: 0.9em;
+        margin-right: 1em;
+    }
+
+    a img {
+        width: 2em;
+        filter: saturate(95%);
+        transition: 0.5s;
+    }
+
+    a:hover img {
+        filter: saturate(120%);
+        transform: translateY(-0.5em);
+    }
+
+    @media screen and (max-width: 800px) {
+        a img {
+            width: 1.5em;
+        }
+
+        li:not(:first-child) {
+            margin-right: 1em;
+        }
+    }
+</style>

@@ -1,0 +1,70 @@
+---
+import { Release } from "../Types";
+import ColoredText from "./ColoredText.astro";
+
+export interface Props {
+    release: Release;
+};
+
+const { release } = Astro.props;
+const youtubeLink = release.links.find(release => release.name.toLowerCase() === "youtube");
+
+---
+<section class="outer">
+    <img src={release.imageSrc} alt="Album Artwork"/>
+
+    <section class="inner">
+        <span class="release-name">{release.name}</span>
+        <span class="artists">{release.artists}</span>
+        {youtubeLink && <a href={youtubeLink.url} target="_blank"><img src="social/youtube.png"> <ColoredText class="youtube-link" textColor="#dd0000">Watch on Youtube</ColoredText></a>}
+    </section>
+</section>
+<style>
+    .outer {
+        display: flex;
+        margin: 2rem;
+    }
+
+    section > img {
+        width: 3em;
+        height: 3rem;
+        background-color: black;
+        align-self: center;
+        margin-right: 1.5em;
+    }
+
+    .inner > span, .inner > a {
+        display: block;
+    }
+
+    .release-name {
+        font-weight: 700;
+    }
+
+    .artists {
+        font-weight: 400;
+        color: #555;
+    }
+
+    .youtube-link {
+        filter: saturate(85%);
+        transition: 0.5s;
+        font-size: 0.9em;
+    }
+
+    a:hover > .youtube-link {
+        filter: saturate(110%);
+    }
+
+    a > img {
+        width: 1.75em;
+        display: inline;
+        filter: saturate(95%);
+        transition: 0.5s;
+    }
+
+    a:hover > img {
+        filter: saturate(110%);
+        transform: translateY(-0.15em);
+    }
+</style>

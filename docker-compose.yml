@@ -1,0 +1,8 @@
+services:
+  website:
+    container_name: website
+    build: .
+    ports:
+    - 80:80
+    volumes:
+    - ./dist:/usr/share/nginx/html/

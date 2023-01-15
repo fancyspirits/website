@@ -1,0 +1,40 @@
+---
+import ArtistRound from "../components/ArtistRound.astro";
+import { Artist } from "../Types";
+
+export interface Props {
+	frontmatter: {
+        artists: Artist[]
+    }
+}
+
+const { frontmatter: {artists} } = Astro.props;
+---
+<ul>
+    {artists.map(artist => <li><ArtistRound artist={artist}></ArtistRound></li>)}
+</ul>
+<style>
+    ul {
+        display: flex;
+        justify-content: space-around;
+        flex-wrap: wrap;
+        row-gap: 1.5em;
+    }
+
+    li {
+        margin-right: 1.5em;
+    }
+
+    @media screen and (max-width: 800px) {
+        ul {
+            flex-wrap: nowrap;
+            overflow-x: hidden;
+            padding-left: -10em;
+            width: fit-content;
+        }
+
+        li {
+            
+        }
+    }
+</style>

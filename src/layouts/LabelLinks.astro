@@ -1,0 +1,42 @@
+---
+import ColoredText from "../components/ColoredText.astro";
+import { ColoredSocialLink } from "../Types";
+
+export interface Props {
+	frontmatter: {
+        links: ColoredSocialLink[]
+    }
+};
+
+const { frontmatter: { links } } = Astro.props;
+---
+<ul>
+    {links.map(link => <li><a href={link.url} target="_blank"> <img src={link.icon}> <ColoredText class="linkText" textColor={link.textColor}>{link.name}</ColoredText></a></li>)}
+</ul>
+<style>
+    img {
+        width: 1.75em;
+        display: inline;
+        filter: saturate(95%);
+        transition: 0.5s;
+    }
+    
+    a:hover > img {
+        filter: saturate(120%);
+        transform: translateY(-0.25em);
+    }
+
+    li {
+        padding: 0.5em 0em;
+    }
+
+    .linkText {
+        margin-left: 0.15em;
+        transition: 0.5s;
+        filter: saturate(85%);
+    }
+
+    a:hover > .linkText {
+        filter: saturate(110%);
+    }
+</style>

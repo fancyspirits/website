@@ -1,0 +1,55 @@
+---
+import ArtistRoundToggle from '../components/ArtistRoundToggle.astro';
+import Layout from '../layouts/BaseLayout.astro';
+import { ArtistDetailed } from '../Types';
+
+const artists = await Astro.glob<ArtistDetailed>("../content/artists/*.mdx").then(
+    artists => artists.map(artist => artist.frontmatter)
+);
+---
+<Layout title="Fancy Spirits: Artists">
+    <div class="wrapper">
+        <main>
+            <h1>Our Artists</h1>
+            <section>
+                {artists.map(artist => {
+                    return <ArtistRoundToggle artist={artist}></ArtistRoundToggle>;
+                })}
+            </section>
+        </main>
+    </div>
+</Layout>
+<style>
+    main {
+        width: 80%;
+        max-width: 1200px;
+    }
+
+    .wrapper {
+        display: flex;
+        justify-content: center;
+    }
+
+    h1 {
+        font-family: "IBM Plex Sans";
+        font-weight: 600;
+        font-size: 2rem;
+    }
+
+    section {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 3em;
+        margin-top: 1em;
+    }
+
+    @media screen and (max-width: 800px) {
+        main {
+            width: 95%;
+        }
+
+        section {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+</style>

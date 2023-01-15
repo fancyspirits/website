@@ -1,0 +1,291 @@
+---
+import Card from '../components/Card.astro';
+import SocialBar from '../components/SocialBar.astro';
+import Layout from '../layouts/BaseLayout.astro';
+import { Release } from '../Types';
+
+const releases = await Astro.glob<Release>("../content/releases/*.mdx").then(
+    releases => releases.map(release => release.frontmatter)
+);
+
+releases.sort((release1, release2) => {
+    const date1 = new Date(release1.releaseDate.year, release1.releaseDate.month, release1.releaseDate.day);
+    const date2 = new Date(release2.releaseDate.year, release2.releaseDate.month, release2.releaseDate.day);
+    return date2.getTime() - date1.getTime();
+});
+
+function formatReleaseDate(release: Release) {
+    const date = new Date(release.releaseDate.year, release.releaseDate.month, release.releaseDate.day);
+    return date.toLocaleDateString();
+}
+---
+<style>
+    main {
+        width: 80%;
+        max-width: 1200px;
+    }
+
+    .wrapper {
+        display: flex;
+        justify-content: center;
+    }
+
+    h1 {
+        font-family: "IBM Plex Sans";
+        font-weight: 600;
+        font-size: 2rem;
+        margin-bottom: 1em;
+    }
+
+    .card-wrapper {
+        display: grid;
+        grid-template-columns: max(5em, 20%) auto 20%;
+    }
+
+    .release-image {
+        grid-row: 1 / 2;
+        grid-column: 1 / 2;
+        display: flex;
+        align-items: center;
+        justify-content: start;
+        padding: 0.5em;
+        transition: 1s;
+    }
+    
+    .release-image img {
+        width: 100%;
+        border-radius: 1em;
+        box-shadow: 5px 5px 7px rgba(70,70,70,0.15),
+            -1px -1px 4px rgba(200,200,200,0.6);
+        transition: 1s;
+        cursor: pointer;
+    }
+
+    .release-image img:hover {
+        transform: scale(150%, 150%);
+        box-shadow: 10px 10px 15px rgba(70,70,70,0.15),
+            -2px -2px 8px rgba(200,200,200,0.6);
+    }
+
+    .release-info {
+        grid-row: 1 / 2;
+        grid-column: 2 / 3;
+        justify-self: stretch;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+        padding-left: 1.5em;
+    }
+
+    .release-info .release-name {
+        font-size: 1.25em;
+        font-weight: 600;
+    }
+    
+    .release-info .release-genre {
+        font-size: 0.9em;
+        font-weight: 400;
+        font-style: italic;
+        margin-top: 0.25em;
+    }
+
+    .release-date {
+        grid-row: 1 / 2;
+        grid-column: 3 / 4;
+        justify-self: flex-end;
+        align-self: flex-start;
+        font-size: 0.8em;
+        color: #777;
+        font-weight: 300;
+        font-style: italic;
+        text-align: end;
+        transition: 1s;
+    }
+
+    .release-description {
+        grid-row: 2 / 3;
+        grid-column: 2 / 4;
+        font-weight: 300;
+        margin-top: 1.5em;
+    }
+
+    .release-links {
+        grid-row: 3 / 4;
+        grid-column: 1 / 4;
+        margin-top: 2em;
+    }
+
+    .release-tracks {
+        grid-row: 4 / 5;
+        grid-column: 1 / 4;
+        margin-top: 1em;
+    }
+
+    .release-tracks hr {
+        margin-bottom: 1em;
+    }
+
+    .release-tracks h3 {
+        font-size: 1.25em;
+    }
+
+    .release-track {
+        margin-top: 1em;
+        margin-bottom: 1em;
+        display: grid;
+        grid-template-columns: min-content max-content 1fr;
+    }
+
+    .release-track-index {
+        grid-row: 1 / 2;
+        grid-column: 1 / 2;
+        margin-right: 1em;
+        justify-self: flex-start;
+        align-self: center;
+        width: min-content;
+    }
+
+    .release-track-info {
+        grid-row: 1 / 2;
+        grid-column: 2 / 3;
+        align-self: stretch;
+        justify-self: flex-start;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+    }
+
+    .release-track-info .release-track-name {
+        font-weight: 600;
+    }
+
+    .release-track-info  .release-track-feat {
+        font-weight: 300;
+        font-style: italic;
+        font-size: 0.9em;
+    }
+
+    .release-track-links {
+        grid-row: 1 / 2;
+        grid-column: 3 / 4;
+        align-self: center;
+        justify-self: flex-end;
+        margin-left: 2em;
+    }
+
+    .card {
+        margin-bottom: 2em;
+    }
+
+    .card-animation {
+        animation: card-enters 1s 1;
+    }
+
+    @keyframes card-enters {
+        0% {
+            opacity: 0;
+        }
+
+        100% {
+            opacity: 1;
+        }
+    }
+
+    @media screen and (max-width: 800px) {
+        main {
+            width: 95%;
+        }
+
+        .release-date {
+            grid-row: 1 / 2;
+            grid-column: 1 / 4;
+            text-align: center;
+            justify-self: unset;
+            align-self: unset;
+            margin-bottom: 2em;
+        }
+
+        .release-description {
+            grid-row: 3 / 4;
+            grid-column: 1 / 4;
+        }
+
+        .release-image {
+            grid-row: 2 / 3;
+            padding: 0;
+        }
+
+        .release-info {
+            grid-row: 2 / 3;
+            grid-column: 2 / 4;
+        }
+
+        .release-links {
+            grid-row: 4 / 5;
+            grid-column: 1 / 4;
+        }
+
+        .release-tracks {
+            grid-row: 5 / 6;
+        }
+
+        .release-track .release-track-links {
+            grid-row: 2 / 3;
+            grid-column: 2 / 4;
+            justify-self: flex-start;
+            margin-top: 0.25em;
+            margin-bottom: 0.5em;
+            margin-left: 0;
+        }
+    }
+</style>
+<Layout title="Fancy Spirits: Releases">
+    <div class="wrapper">
+        <main>
+            <h1>Releases</h1>
+            {releases.map(release => 
+            <Card class="card card-animation">
+                <div class="card-wrapper">
+                    <div class="release-image">
+                        <img src={release.imageSrc} alt={release.name}>
+                    </div>
+                    <div class="release-info">
+                        <p class="release-name">{release.name}</p>
+                        <p class="release-artists">{release.artists}</p>
+                        <p class="release-genre">{release.genre}</p>
+                    </div>
+                    <div class="release-description">
+                        <p>{release.description}</p>
+                    </div>
+                    <div class="release-date">
+                        <span>Released at {formatReleaseDate(release)}</span>
+                    </div>
+                    <div class="release-links">
+                        <SocialBar links={release.links} before="Stream now"></SocialBar>
+                    </div>
+                    {release.tracks && <div class="release-tracks">
+                        <hr />
+                        <h3>Tracks</h3>
+                        {release.tracks.map((track, index) => <div class="release-track">
+                            <p class="release-track-index">{index + 1}.</p>
+                            <div class="release-track-info">
+                                <p class="release-track-name">{track.name}</p>
+                                {track.feat && <span class="release-track-feat">feat. {track.feat}</span>}
+                            </div>
+                            <div class="release-track-links">
+                                <SocialBar links={track.links}></SocialBar>
+                            </div>
+                        </div>)}
+                    </div>}
+                </div>    
+            </Card>)}
+        </main>
+    </div>
+</Layout>
+<script>
+    const observer = new IntersectionObserver(entries => {
+
+    });
+    observer.observe(document.querySelector(".card"));
+</script>

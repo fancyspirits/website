@@ -1,0 +1,161 @@
+---
+import Card from '../components/Card.astro';
+import Layout from '../layouts/BaseLayout.astro';
+import AboutLabel from '../content/about-label.mdx'
+import RecentReleaseLayout from '../components/RecentRelease.astro';
+import LabelLinks from '../content/LabelLinks.mdx';
+import ArtistsBar from '../content/artists-bar.mdx';
+import { Release } from '../Types';
+
+const releases = await Astro.glob<Release>("../content/releases/*.mdx").then(
+	releases => releases.map(release => release.frontmatter)
+);
+
+releases.sort((release1, release2) => {
+    const date1 = new Date(release1.releaseDate.year, release1.releaseDate.month, release1.releaseDate.day);
+    const date2 = new Date(release2.releaseDate.year, release2.releaseDate.month, release2.releaseDate.day);
+    return date2.getTime() - date1.getTime();
+});
+
+const recentReleases = releases.slice(0, 3);
+---
+<style>
+	.wrapper {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		padding-top: 1.75em;
+	}
+
+	main {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		grid-template-areas:
+			"about about new-releases"
+			"about about links"
+			"artists-bar artists-bar artists-bar";
+		gap: 1em;
+		width: 85%;
+	}
+
+	h1 {
+        font-family: "IBM Plex Sans";
+        font-weight: 600;
+        font-size: 2rem;
+		width: 80%;
+    }
+
+	h2 {
+		font-weight: 600;
+		font-size: 1.5rem;
+		margin-bottom: 0.5em;
+	}
+
+	.about {
+		grid-area: about;
+	}
+
+	.new-releases {
+		grid-area: new-releases;
+	}
+
+	.links {
+		grid-area: links;
+	}
+
+	.artists-bar {
+		margin-top: 1em;
+		grid-area: artists-bar;
+	}
+
+	@media screen and (max-width: 800px) {
+		main {
+			display: grid;
+			grid-template-columns: repeat(1, 1fr);
+			grid-template-areas:
+				"artists-bar"
+				"about"
+				"new-releases"
+				"links";
+			gap: 1em;
+			padding-top: 0em;
+			width: 95%;
+		}
+
+		.about {
+			grid-area: about;
+		}
+
+		.new-releases {
+			grid-area: new-releases;
+		}
+
+		.links {
+			grid-area: links;
+		}
+
+		.artists-bar {
+			grid-area: artists-bar;
+			overflow-x: scroll;
+		}
+
+		.artists-bar.artists-bar::-webkit-scrollbar {
+			display: none;
+		}
+	}
+	@media screen and (max-width: 1000px) and (min-width: 800px) {
+		
+		.wrapper {
+			padding-top: 0em;
+		}
+
+		main {
+			display: grid;
+			grid-template-columns: repeat(3, 1fr);
+			grid-template-areas:
+				"about about about"
+				"new-releases new-releases links"
+				"artists-bar artists-bar artists-bar";
+			gap: 1em;
+			width: 90%;
+		}
+
+		.about {
+			grid-area: about;
+		}
+
+		.new-releases {
+			grid-area: new-releases;
+		}
+
+		.links {
+			grid-area: links;
+		}
+
+		.artists-bar {
+			grid-area: artists-bar;
+		}
+	}
+</style>
+<Layout title="Fancy Spirits">
+	<section class="wrapper">
+		<h1>Fancy Spirits</h1>
+		<main>
+			<Card class="about">
+				<h2>Our Label</h2>
+				<AboutLabel />
+			</Card>
+			<Card class="new-releases" title="New releases">
+				{recentReleases.map(release => 
+				<RecentReleaseLayout release={release} />
+				)}
+			</Card>
+			<Card class="links" title="Links">
+				<LabelLinks />
+			</Card>
+			<section class="artists-bar">
+				<ArtistsBar></ArtistsBar>
+			</section>
+		</main>
+	</section>
+</Layout>
