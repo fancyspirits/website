@@ -185,10 +185,12 @@ function formatReleaseDate(release: Release) {
     @keyframes card-enters {
         0% {
             opacity: 0;
+            transform: translateY(20em);
         }
 
         100% {
             opacity: 1;
+            transform: translateY(0);
         }
     }
 
@@ -245,7 +247,7 @@ function formatReleaseDate(release: Release) {
         <main>
             <h1>Releases</h1>
             {releases.map(release => 
-            <Card class="card card-animation">
+            <Card class="card">
                 <div class="card-wrapper">
                     <div class="release-image">
                         <img src={release.imageSrc} alt={release.name}>
@@ -285,7 +287,12 @@ function formatReleaseDate(release: Release) {
 </Layout>
 <script>
     const observer = new IntersectionObserver(entries => {
-
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add("card-animation");
+                return;
+            }
+        })
     });
-    observer.observe(document.querySelector(".card"));
+    document.querySelectorAll(".card").forEach(card => observer.observe(card));
 </script>
