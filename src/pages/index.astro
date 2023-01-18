@@ -7,8 +7,8 @@ import LabelLinks from '../content/LabelLinks.mdx';
 import ArtistsBar from '../content/artists-bar.mdx';
 import { Release } from '../Types';
 
-const releases = await Astro.glob<Release>("../content/releases/*.mdx").then(
-	releases => releases.map(release => release.frontmatter)
+const releases = await Astro.glob<Release>("../content/releases/**/*.mdx").then(
+	releases => releases.map(release => release.frontmatter).filter(release => !(release as any).draft)
 );
 
 releases.sort((release1, release2) => {

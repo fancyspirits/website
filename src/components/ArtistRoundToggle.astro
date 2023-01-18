@@ -36,15 +36,17 @@ const { artist } = Astro.props;
         padding: auto 10em;
     }
 
-    em {
+    strong {
         text-align: center;
+        font-weight: 500;
         display: block;
         margin-top: 0.5em;
         transition: 0.5s;
     }
 
-    a:hover > em {
+    a:hover > strong {
         transform: scale(1.05);
+        font-weight: 700;
     }
 
     .artist-details {
@@ -239,7 +241,7 @@ const { artist } = Astro.props;
 <div class="artist-toggle">
     <a>
         <img src={artist.imageSrc} alt={artist.name}>
-        <em>{artist.name}</em>
+        <strong>{artist.name}</strong>
     </a>
 </div>
 <Card class="artist-details">
