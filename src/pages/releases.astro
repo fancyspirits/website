@@ -4,8 +4,8 @@ import SocialBar from '../components/SocialBar.astro';
 import Layout from '../layouts/BaseLayout.astro';
 import { Release } from '../Types';
 
-const releases = await Astro.glob<Release>("../content/releases/*.mdx").then(
-    releases => releases.map(release => release.frontmatter)
+const releases = await Astro.glob<Release>("../content/releases/**/*.mdx").then(
+    releases => releases.map(release => release.frontmatter).filter(release => !(release as any).draft)
 );
 
 releases.sort((release1, release2) => {
