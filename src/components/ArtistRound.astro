@@ -71,7 +71,7 @@ const youtubeLink = artist.links.find(link => link.name.toLowerCase() === "youtu
     }
 </style>
 <div>
-    <a href={youtubeLink.url} target="_blank">
+    <a href={youtubeLink?.url} target="_blank">
         <img src={artist.imageSrc} alt={artist.name}>
         <em>{artist.name}</em>
     </a>

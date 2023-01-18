@@ -4,7 +4,7 @@ import Layout from '../layouts/BaseLayout.astro';
 import AboutLabel from '../content/about-label.mdx'
 import RecentReleaseLayout from '../components/RecentRelease.astro';
 import LabelLinks from '../content/LabelLinks.mdx';
-import ArtistsBar from '../content/artists-bar.mdx';
+import ArtistsBar from '../components/ArtistsBar.astro';
 import { Release } from '../Types';
 
 const releases = await Astro.glob<Release>("../content/releases/**/*.mdx").then(
