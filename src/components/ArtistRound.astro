@@ -1,5 +1,5 @@
 ---
-import { Artist, ArtistDetailed } from '../Types';
+import { ArtistDetailed } from '../Types';
 
 export interface Props {
 	artist: ArtistDetailed;
@@ -7,10 +7,17 @@ export interface Props {
 
 const { artist } = Astro.props;
 const youtubeLink = artist.links.find(link => link.name.toLowerCase() === "youtube");
+
+const backgroundColor = artist.backgroundColor;
 ---
 
 
-<style>
+<style define:vars={{backgroundColor}}>
+
+    .withBackground {
+        background-color: var(--backgroundColor);
+    }
+
     img {
         background-image: url({artist.imageSrc});
         max-width: 5em;
@@ -18,7 +25,7 @@ const youtubeLink = artist.links.find(link => link.name.toLowerCase() === "youtu
         aspect-ratio: 1;
         border-radius: 50%;
         cursor: pointer;
-        filter: saturate(33%);
+        filter: saturate(50%);
         transition: 0.4s;
         border: solid 0.75px #dddddd;
     }
@@ -72,7 +79,7 @@ const youtubeLink = artist.links.find(link => link.name.toLowerCase() === "youtu
 </style>
 <div>
     <a href={youtubeLink?.url} target="_blank">
-        <img src={artist.imageSrc} alt={artist.name}>
+        <img src={artist.imageSrc} alt={artist.name} class:list={[{withBackground: backgroundColor !== undefined}]}>
         <em>{artist.name}</em>
     </a>
 </div>

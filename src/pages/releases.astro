@@ -194,6 +194,10 @@ function formatReleaseDate(release: Release) {
         }
     }
 
+    .mobile-separator {
+        display: none;
+    }
+
     @media screen and (max-width: 800px) {
         main {
             width: 95%;
@@ -232,13 +236,48 @@ function formatReleaseDate(release: Release) {
             grid-row: 5 / 6;
         }
 
+        .release-track {
+            grid-template-columns: 1fr min-content max-content 1fr 1fr;
+        }
+
+        .release-track-index {
+            grid-row: 2 / 3;
+            grid-column: 2 / 3;
+            margin-right: 3em;
+            justify-self: end;
+            font-size: 1.5em;
+            font-weight: 300;
+        }
+        
+        .release-track-info {
+            grid-column: 2 / 5;
+            justify-self: center;
+        }
+
+        .release-track-info > span, .release-track-info > p {
+            text-align: center;
+        }
+
         .release-track .release-track-links {
             grid-row: 2 / 3;
-            grid-column: 2 / 4;
-            justify-self: flex-start;
-            margin-top: 0.25em;
-            margin-bottom: 0.5em;
+            grid-column: 2 / 5;
+            justify-self: center;
+            margin-top: 1em;
+            margin-bottom: 1em;
             margin-left: 0;
+        }
+
+        .mobile-separator {
+            grid-row: 6 / 7;
+            grid-column: 2 / 5;
+            align-self: center;
+            text-align: center;
+            color: #777777;
+            border-top: 0.5px solid black;
+            min-height: 0.25em;
+            display: block;
+            width: 33%;
+            justify-self: center;
         }
     }
 </style>
@@ -264,7 +303,7 @@ function formatReleaseDate(release: Release) {
                         <span>Released at {formatReleaseDate(release)}</span>
                     </div>
                     <div class="release-links">
-                        <SocialBar links={release.links} before="Stream now"></SocialBar>
+                        <SocialBar links={release.links} before={`Stream ${release.tracks ? "Album" : "now"}`}></SocialBar>
                     </div>
                     {release.tracks && <div class="release-tracks">
                         <hr />
@@ -276,8 +315,14 @@ function formatReleaseDate(release: Release) {
                                 {track.feat && <span class="release-track-feat">feat. {track.feat}</span>}
                             </div>
                             <div class="release-track-links">
-                                <SocialBar links={track.links}></SocialBar>
+                                <SocialBar 
+                                    links={track.links} 
+                                    marginRight={false} 
+                                    marginLeft={true}
+                                    marginAmount="1em"
+                                ></SocialBar>
                             </div>
+                            <div class="mobile-separator">&nbsp;</div>
                         </div>)}
                     </div>}
                 </div>    

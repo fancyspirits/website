@@ -8,11 +8,16 @@ export interface Props {
 };
 
 const { artist } = Astro.props;
+const backgroundColor = artist.backgroundColor;
 
 ---
 
 
-<style>
+<style define:vars={{backgroundColor}}>
+
+    .withBackground {
+        background-color: var(--backgroundColor);
+    }
     .artist-toggle img {
         background-image: url({artist.imageSrc});
         max-width: 5em;
@@ -20,7 +25,7 @@ const { artist } = Astro.props;
         aspect-ratio: 1;
         border-radius: 50%;
         cursor: pointer;
-        filter: saturate(33%);
+        filter: saturate(50%);
         transition: 0.4s;
         border: solid 0.75px #dddddd;
     }
@@ -95,7 +100,7 @@ const { artist } = Astro.props;
     .container-details .artist-image-name {
         display: flex;
         grid-row: 1 / 2;
-        grid-column: 1 / 2;
+        grid-column: 1 / 4;
         justify-content: flex-start;
     }
 
@@ -103,6 +108,7 @@ const { artist } = Astro.props;
         border-radius: 50%;
         box-shadow: 0.15em 0.15em 1em rgba(0,0,0,0.25);
         width: 10em;
+        aspect-ratio: 1;
         transition: 1s;
         cursor: pointer;
         animation: artist-image 0.75s ease-in-out 0s;
@@ -126,9 +132,10 @@ const { artist } = Astro.props;
     }
 
     .container-details .artist-image-name h2 {
-        margin-left: 1.5em;
-        font-size: 1.5em;
+        margin-left: 0.75em;
+        font-size: 2.75em;
         font-style: italic;
+        font-weight: 300;
         animation: artist-name 1s ease-in-out 0s;
     }
 
@@ -207,7 +214,7 @@ const { artist } = Astro.props;
 
         .container-details .artist-image-name h2 {
             margin-left: 1em;
-            font-size: 1.25em;
+            font-size: 2em;
         }
     }
 </style>
@@ -241,14 +248,14 @@ const { artist } = Astro.props;
 
 <div class="artist-toggle">
     <a>
-        <img src={artist.imageSrc} alt={artist.name}>
+        <img src={artist.imageSrc} alt={artist.name} class:list={[{withBackground: backgroundColor !== undefined}]}>
         <strong>{artist.name}</strong>
     </a>
 </div>
 <Card class="artist-details">
     <section class="container-details">
         <div class="artist-image-name">
-            <img src={artist.imageSrc} alt={artist.name}>
+            <img src={artist.imageSrc} alt={artist.name} class:list={[{withBackground: backgroundColor !== undefined}]}>
             <h2>{artist.name}</h2>
         </div>
         <div class="artist-description"><p>{artist.description}</p></div>

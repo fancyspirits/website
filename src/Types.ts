@@ -29,13 +29,10 @@ export type Release = {
     tracks?: AlbumTrack[];
 };
 
-export type Artist = {
+export type ArtistDetailed =  {
     name: string;
     imageSrc: string;
-    youtubeLink: string;
-};
-
-export type ArtistDetailed = Omit<Artist, "youtubeLink"> & {
     links: SocialLink[];
     description: string;
+    backgroundColor?: string;
 };

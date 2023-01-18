@@ -5,19 +5,30 @@ export interface Props {
     links: SocialLink[];
     class?: string;
     before?: string;
+    marginAmount?: string;
+    marginAmountSmall?: string;
+    marginLeft?: boolean;
+    marginRight?: boolean;
 }
 
-const {class: className, before, links} = Astro.props;
+const {
+    class: className, 
+    before, 
+    links, 
+    marginAmount = "1.5em", 
+    marginAmountSmall = "1em", 
+    marginLeft = false, 
+    marginRight = true
+} = Astro.props;
 ---
-<!-- <div class="wrap-social" class={className}> -->
 <div class:list={["wrap-social", className]}>
     {before && <div class="mobile"><p>{before}: </p></div>}
     <ul>
-        {before && <li><p>{before}: </p></li>}
-        {links.map(link => <li><a href={link.url} target="_blank"><img src={link.icon} alt={link.name} /></a></li>)}
+        {before && <li class="first"><p>{before}: </p></li>}
+        {links.map(link => <li class:list={[{"marginRight": marginRight, "marginLeft": marginLeft}]}><a href={link.url} target="_blank"><img src={link.icon} alt={link.name} /></a></li>)}
     </ul>
 </div>
-<style>
+<style define:vars={{marginAmount, marginAmountSmall}}>
     .wrap-social {
         width: 100%;
     }
@@ -48,8 +59,11 @@ const {class: className, before, links} = Astro.props;
         }
     }
 
-    li:not(:first-child) {
-        margin-right: 1.5em;
+    li:not(.first).marginRight {
+        margin-right: var(--marginAmount);
+    }
+    li:not(.first).marginLeft {
+        margin-left: var(--marginAmount);
     }
 
     li p {
@@ -71,11 +85,18 @@ const {class: className, before, links} = Astro.props;
 
     @media screen and (max-width: 800px) {
         a img {
-            width: 1.5em;
+            min-width: 1.5em;
         }
 
-        li:not(:first-child) {
-            margin-right: 1em;
+        .wrap-social {
+            display: block;
+        }
+
+        li:not(:first-child).marginRight {
+            margin-right: var(--marginAmountSmall);
+        }
+        li:not(:first-child).marginLeft {
+            margin-left: var(--marginAmountSmall);
         }
     }
 </style>

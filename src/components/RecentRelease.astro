@@ -22,12 +22,13 @@ const youtubeLink = release.links.find(release => release.name.toLowerCase() ===
 <style>
     .outer {
         display: flex;
-        margin: 2rem;
+        margin: 2rem 1rem;
+
     }
 
     section > img {
-        width: 3em;
-        height: 3rem;
+        width: clamp(2.5em, 40%, 5em);
+        aspect-ratio: 1;
         background-color: black;
         align-self: center;
         margin-right: 1.5em;
