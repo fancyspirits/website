@@ -1,6 +1,6 @@
 ---
 import ArtistRound from "../components/ArtistRound.astro";
-import { Artist } from "../Types";
+import { Artist, ArtistDetailed } from "../Types";
 
 export interface Props {
 	frontmatter: {
@@ -8,7 +8,11 @@ export interface Props {
     }
 }
 
-const { frontmatter: {artists} } = Astro.props;
+const artists = await Astro.glob<ArtistDetailed>("../content/artists/**.mdx").then(
+    artists => artists.map(artists => artists.frontmatter)
+);
+
+// const { frontmatter: {artists} } = Astro.props;
 ---
 <ul>
     {artists.map(artist => <li><ArtistRound artist={artist}></ArtistRound></li>)}

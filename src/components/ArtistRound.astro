@@ -1,11 +1,12 @@
 ---
-import { Artist } from '../Types';
+import { Artist, ArtistDetailed } from '../Types';
 
 export interface Props {
-	artist: Artist;
+	artist: ArtistDetailed;
 }
 
 const { artist } = Astro.props;
+const youtubeLink = artist.links.find(link => link.name.toLowerCase() === "youtube");
 ---
 
 
@@ -19,6 +20,7 @@ const { artist } = Astro.props;
         cursor: pointer;
         filter: saturate(33%);
         transition: 0.4s;
+        border: solid 0.75px #dddddd;
     }
 
     a {
@@ -69,7 +71,7 @@ const { artist } = Astro.props;
     }
 </style>
 <div>
-    <a href={artist.youtubeLink} target="_blank">
+    <a href={youtubeLink.url} target="_blank">
         <img src={artist.imageSrc} alt={artist.name}>
         <em>{artist.name}</em>
     </a>
