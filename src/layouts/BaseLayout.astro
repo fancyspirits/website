@@ -6,9 +6,10 @@ import "../styles/Base.css";
 
 export interface Props {
 	title: string;
+	route?: string;
 }
 
-const { title } = Astro.props;
+const { title, route } = Astro.props;
 ---
 
 <!DOCTYPE html>
@@ -21,7 +22,7 @@ const { title } = Astro.props;
 		<title>{title}</title>
 	</head>
 	<body>
-		<NavBar />
+		<NavBar route={route} />
 		<main>
 			<slot />
 		</main>

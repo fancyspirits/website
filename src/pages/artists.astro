@@ -7,7 +7,7 @@ const artists = await Astro.glob<ArtistDetailed>("../content/artists/*.mdx").the
     artists => artists.map(artist => artist.frontmatter)
 );
 ---
-<Layout title="Fancy Spirits: Artists">
+<Layout title="Fancy Spirits: Artists" route="artists">
     <div class="wrapper">
         <main>
             <h1>Our Artists</h1>

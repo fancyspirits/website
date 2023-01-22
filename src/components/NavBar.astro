@@ -1,22 +1,26 @@
 ---
-const pathname = new URL(Astro.request.url).pathname;
-const currentPath = pathname.slice(1);
+
+export interface Props {
+	route?: string;
+}
+
+const { route } = Astro.props;
 ---
 <nav>
     <ul>
         <li>
             <a href="/"><img src="/favicon.svg" alt="FS" width="20"></a>
         </li>
-        <li class={currentPath === "" ? "active" : ""}>
+        <li class={!route || route === "" ? "active" : ""}>
             <a href="/"><p>Home</p></a>
         </li>
-        <li class={currentPath === "artists" ? "active" : ""}>
+        <li class={route === "artists" ? "active" : ""}>
             <a href="/artists"><p>Artists</p></a>
         </li>
-        <li class={currentPath === "releases" ? "active" : ""}>
+        <li class={route === "releases" ? "active" : ""}>
             <a href="/releases"><p>Releases</p></a>
         </li>
-        <li class={currentPath === "demo" ? "active" : ""}>
+        <li class={route === "demo" ? "active" : ""}>
             <a href="/demo"><p>Submit Demo</p></a>
         </li>
     </ul>
