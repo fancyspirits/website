@@ -262,6 +262,35 @@ artistReleases.sort((release1, release2) => {
             margin-left: 1em;
             font-size: 2em;
         }
+
+        .releases {
+            display: grid;
+            gap: 2em 0.5em;
+            grid-template-columns: repeat(3, 1fr);
+            grid-row: 3 / 4;
+            grid-column: 1 / 4;
+            margin-top: 2em;
+            margin-bottom: 0.5em;
+        }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .container-details .artist-image-name img:hover {
+            border-radius: 50%;
+            transform: scale(100%, 100%);
+        }
+
+        .artist-toggle:hover {
+            transform: translateY(0);
+        }
+
+        .container-details .artist-image-name img, 
+        .container-details .social-links, 
+        .releases .release-img, 
+        .container-details .artist-description, 
+        .container-details .artist-image-name h2 {
+            animation: none;
+        }
     }
 </style>
 <script>
