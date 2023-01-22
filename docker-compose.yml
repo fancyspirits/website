@@ -14,5 +14,5 @@ services:
     volumes:
       - ./public:/srv/public:rw
       - ./src/content:/srv/src/content:rw
-      - ./filebrowser/filebrowser.json:/.filebrowser.json
+      - ./filebrowser/.filebrowser.json:/.filebrowser.json
       - ./filebrowser/filebrowser.db:/database.db
