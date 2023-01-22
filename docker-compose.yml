@@ -6,3 +6,13 @@ services:
     - 80:80
     volumes:
     - ./dist:/usr/share/nginx/html/
+  editor:
+    container_name: editor
+    image: filebrowser/filebrowser
+    ports:
+      - 8080:8080
+    volumes:
+      - ./public:/srv/public:rw
+      - ./src/content:/srv/src/content:rw
+      - ./filebrowser/filebrowser.json:/.filebrowser.json
+      - ./filebrowser/filebrowser.db:/database.db
