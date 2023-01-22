@@ -211,11 +211,13 @@ for (const release of releases) {
     @keyframes card-enters {
         0% {
             opacity: 0;
+            filter: blur(0.25em);
             transform: translateY(20em);
         }
 
         100% {
             opacity: 1;
+            filter: blur(0);
             transform: translateY(0);
         }
     }
@@ -305,6 +307,19 @@ for (const release of releases) {
             width: 33%;
             justify-self: center;
         }
+    }
+
+    @media (prefers-reduced-motion: reduce), (max-width: 800px) {
+        .release-image img:hover {
+            transform: scale(100%, 100%);
+            box-shadow: 5px 5px 7px rgba(70,70,70,0.15),
+                -1px -1px 4px rgba(200,200,200,0.6);
+        }
+
+        .card-animation {
+            animation: none;
+        }
+
     }
 </style>
 <Layout title="Fancy Spirits: Releases">
