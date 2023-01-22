@@ -1,7 +1,7 @@
 ---
 import SocialBar from "../components/SocialBar.astro";
 import Card from "./Card.astro";
-import { ArtistDetailed } from "../Types";
+import { ArtistDetailed, Release } from "../Types";
 
 export interface Props {
     artist: ArtistDetailed
@@ -9,6 +9,16 @@ export interface Props {
 
 const { artist } = Astro.props;
 const backgroundColor = artist.backgroundColor;
+
+const artistReleases = await Astro.glob<Release>("../content/releases/**/**.mdx").then(
+    releases => releases.map(release => release.frontmatter).filter(release => release.artists.includes(artist.name)).filter(release => !(release as any).draft)
+);
+
+artistReleases.sort((release1, release2) => {
+    const date1 = new Date(release1.releaseDate.year, release1.releaseDate.month, release1.releaseDate.day);
+    const date2 = new Date(release2.releaseDate.year, release2.releaseDate.month, release2.releaseDate.day);
+    return date2.getTime() - date1.getTime();
+});
 
 ---
 
@@ -159,15 +169,49 @@ const backgroundColor = artist.backgroundColor;
         animation: artist-description 1s ease-in-out 0s;
     }
 
+
     @keyframes artist-description {
         0% {
             opacity: 0;
             transform: translateY(5em);
+            filter: blur(1em);
         }
 
         100% {
             opacity: 1;
             transform: translateY(0);
+            filter: blur(0);
+        }
+    }
+
+    .releases {
+        display: grid;
+        gap: 2em 0.5em;
+        grid-template-columns: repeat(5, 1fr);
+        grid-row: 3 / 4;
+        grid-column: 1 / 4;
+        margin-top: 2em;
+        margin-bottom: 0.5em;
+    }
+
+    .releases .release-img {
+        width: clamp(3em, 80%, 15em);
+        aspect-ratio: 1;
+        align-self: center;
+        justify-self: center;
+        border-radius: 0.75em;
+        box-shadow: 0.15em 0.15em 0.5em rgba(0,0,0,0.45);
+        animation: releases 1s ease-in calc(150ms * var(--release-index));
+    }
+
+    @keyframes releases {
+        0% {
+            transform: translateX(15em);
+        }
+        
+        100% {
+            filter: blur(0);
+            transform: translateX(0);
         }
     }
 
@@ -179,7 +223,7 @@ const backgroundColor = artist.backgroundColor;
 
     .container-details .social-links {
         display: block;
-        grid-row: 3 / 4;
+        grid-row: 4 / 5;
         grid-column: 1 / 4;
         animation: artist-social 1.5s ease-in-out 0s;
         margin-top: 1.5em;
@@ -189,6 +233,7 @@ const backgroundColor = artist.backgroundColor;
         0% {
             opacity: 0;
             transform: translateY(5em);
+            filter: blur(1em);
         }
 
         66% {
@@ -199,6 +244,7 @@ const backgroundColor = artist.backgroundColor;
         100% {
             opacity: 1;
             transform: translateY(0);
+            filter: blur(0);
         }
     }
 
@@ -259,6 +305,9 @@ const backgroundColor = artist.backgroundColor;
             <h2>{artist.name}</h2>
         </div>
         <div class="artist-description"><p>{artist.description}</p></div>
+        <div class="releases">
+            {artistReleases.map((release, index) => <img class="release-img" style={`--release-index: ${index}`} src={release.imageSrc} />)}
+        </div>
         <section class="social-links">
             <SocialBar links={artist.links} before="Social Media"></SocialBar>
         </section>
