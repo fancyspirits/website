@@ -68,6 +68,24 @@ const recentReleases = releases.slice(0, 3);
 		grid-area: artists-bar;
 	}
 
+	.label-logo {
+		max-width: 40%;
+		margin-left: auto;
+		max-height: 10em;
+		object-fit: cover;
+		margin-top: -2em;
+		float: right;
+		margin-left: 1.5em;
+		margin-bottom: 1.5em;
+	}
+
+	.label-logo-full {
+		margin-top: 2em;
+		width: 80%;
+		margin-left: auto;
+		margin-right: auto;
+	}
+
 	@media screen and (max-width: 800px) {
 		main {
 			display: grid;
@@ -143,7 +161,11 @@ const recentReleases = releases.slice(0, 3);
 		<main>
 			<Card class="about">
 				<h2>Our Label</h2>
+				<div class="img-wrap">
+					<img class="label-logo" src="/logos/Logo Squared.svg" />
+				</div>
 				<AboutLabel />
+				<img class="label-logo-full" src="/logos/Logo Full.png">
 			</Card>
 			<Card class="new-releases" title="Recent Releases">
 				{recentReleases.map(release => 

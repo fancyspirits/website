@@ -8,8 +8,8 @@ const { route } = Astro.props;
 ---
 <nav>
     <ul>
-        <li>
-            <a href="/"><img src="/favicon.svg" alt="FS" width="20"></a>
+        <li class="logo">
+            <a href="/"><img src="/logos/Logo squared.svg" alt="FS" width="20"></a>
         </li>
         <li class={!route || route === "" ? "active" : ""}>
             <a href="/"><p>Home</p></a>
@@ -26,9 +26,15 @@ const { route } = Astro.props;
     </ul>
 </nav>
 <style>
+
+    .logo {
+        padding: 0 !important;
+    }
+
     img {
         filter: invert();
         width: 2em;
+        transform: scale(1.3);
     }
 
     li:hover img, li:hover.active {
