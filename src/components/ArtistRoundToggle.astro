@@ -40,7 +40,7 @@ artistReleases.sort((release1, release2) => {
         border: solid 0.75px #dddddd;
     }
 
-    a:hover > img {
+    .artist-toggle-a:hover > img {
         filter: saturate(120%);
         border: solid 3px #222222;
     }
@@ -60,7 +60,7 @@ artistReleases.sort((release1, release2) => {
         transition: 0.5s;
     }
 
-    a:hover > strong {
+    .artist-toggle-a:hover > strong {
         transform: scale(1.05);
         font-weight: 700;
     }
@@ -92,7 +92,7 @@ artistReleases.sort((release1, release2) => {
         transform: translateY(-0.75em);
     }
 
-    .artist-toggle.active > a > img {
+    .artist-toggle.active > .artist-toggle-a > img {
         filter: saturate(120%);
         border: solid 3px #222222;
     }
@@ -202,6 +202,20 @@ artistReleases.sort((release1, release2) => {
         border-radius: 0.75em;
         box-shadow: 0.15em 0.15em 0.5em rgba(0,0,0,0.45);
         animation: releases 1s ease-in calc(150ms * var(--release-index));
+        transition: 0.5s;;
+    }
+
+    .releases .release-img-a {
+        transition: 0.75s;
+    }
+    
+    .releases .release-img-a:hover {
+        transition: 0.5s;
+        transform: translateY(-0.75em);
+    }
+
+    .releases .release-img-a:hover .release-img {
+        box-shadow: 0.15em 0.3em 0.5em rgba(0,0,0,0.5);
     }
 
     @keyframes releases {
@@ -287,6 +301,7 @@ artistReleases.sort((release1, release2) => {
         .container-details .artist-image-name img, 
         .container-details .social-links, 
         .releases .release-img, 
+        .releases .release-img-a, 
         .container-details .artist-description, 
         .container-details .artist-image-name h2 {
             animation: none;
@@ -322,7 +337,7 @@ artistReleases.sort((release1, release2) => {
 
 
 <div class="artist-toggle">
-    <a>
+    <a class="artist-toggle-a">
         <img src={artist.imageSrc} alt={artist.name} class:list={[{withBackground: backgroundColor !== undefined}]}>
         <strong>{artist.name}</strong>
     </a>
@@ -335,7 +350,7 @@ artistReleases.sort((release1, release2) => {
         </div>
         <div class="artist-description"><p>{artist.description}</p></div>
         <div class="releases">
-            {artistReleases.map((release, index) => <img class="release-img" style={`--release-index: ${index}`} src={release.imageSrc} />)}
+            {artistReleases.map((release, index) => <a class="release-img-a" href={`/releases#${release.id}-release`}><img class="release-img" style={`--release-index: ${index}`} src={release.imageSrc} /></a>)}
         </div>
         <section class="social-links">
             <SocialBar links={artist.links} before="Social Media"></SocialBar>

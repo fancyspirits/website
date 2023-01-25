@@ -202,6 +202,12 @@ for (const release of releases) {
 
     .card {
         margin-bottom: 2em;
+        position: relative;
+    }
+
+    .anchor {
+        position: absolute;
+        top: -25em;
     }
 
     .card-animation {
@@ -321,6 +327,11 @@ for (const release of releases) {
             animation: none;
         }
 
+        .anchor {
+            position: absolute;
+            top: -5em;
+        }
+
     }
 </style>
 <Layout title="Fancy Spirits: Releases" route="releases">
@@ -329,6 +340,7 @@ for (const release of releases) {
             <h1>Releases</h1>
             {releases.map(release => 
             <Card class="card">
+                <span class="anchor" id={`${release.id}-release`}></span>
                 <div class="card-wrapper">
                     <div class="release-image">
                         <img src={release.imageSrc} alt={release.name}>

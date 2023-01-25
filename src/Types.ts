@@ -15,6 +15,7 @@ export type AlbumTrack = {
 }
 
 export type Release = {
+    id: string;
     name: string;
     imageSrc: string;
     artists: string;
