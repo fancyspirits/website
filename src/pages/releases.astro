@@ -114,6 +114,19 @@ for (const release of releases) {
         border-radius: 50%;
         border: solid 0.75px #dddddd;
         box-shadow: 0.05em 0.05em 0.15em rgba(0, 0, 0, 0.25);
+        transition: 0.5s;
+    }
+
+    .release-info .artists .artist-link {
+        transition: 0.5s;
+    }
+    
+    .release-info .artists .artist-link:hover {
+        transform: translateY(-0.33em);
+    }
+    
+    .release-info .artists .artist-link:hover .artist-img {
+        box-shadow: 0.1em 0.125em 0.15em rgba(0, 0, 0, 0.3);
     }
 
     .release-date {
@@ -332,6 +345,14 @@ for (const release of releases) {
             top: -5em;
         }
 
+        .release-info .artists .artist-link:hover {
+            transform: translateY(0);
+        }
+        
+        .release-info .artists .artist-link:hover .artist-img {
+            box-shadow: 0.05em 0.05em 0.15em rgba(0, 0, 0, 0.25);
+        }
+
     }
 </style>
 <Layout title="Fancy Spirits: Releases" route="releases">
@@ -350,7 +371,7 @@ for (const release of releases) {
                         <p class="release-artists">{release.artists}</p>
                         <p class="release-genre">{release.genre}</p>
                         <div class="artists">
-                        {(release as any).artistObjects.map((artist: ArtistDetailed) => <img class="artist-img" src={artist.imageSrc} style={artist.backgroundColor && `background-color: ${artist.backgroundColor}`}/>)}
+                        {(release as any).artistObjects.map((artist: ArtistDetailed) => <a class="artist-link" href={`/artists#${artist.id}-artist`}><img class="artist-img" src={artist.imageSrc} style={artist.backgroundColor && `background-color: ${artist.backgroundColor}`}/></a>)}
                         </div>
                     </div>
                     <div class="release-description">

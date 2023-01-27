@@ -7,6 +7,53 @@ const artists = await Astro.glob<ArtistDetailed>("../content/artists/*.mdx").the
     artists => artists.map(artist => artist.frontmatter)
 );
 ---
+
+<script>
+    window.addEventListener("DOMContentLoaded", () => {
+        function handleHash() {
+            const artist = document.querySelector(window.location.hash);
+            if (!artist) {
+                return;
+            }
+            const card = artist.parentElement.parentElement;
+            card.classList.add("active");
+            card.previousElementSibling.classList.add("active");
+            (card.previousElementSibling as any).active = true;
+            card.scrollIntoView({
+                behavior: "smooth",
+                block: "center"
+            });
+            history.replaceState(null, null, " ");
+        }
+        const buttons = document.querySelectorAll(".artist-toggle");
+        buttons.forEach((button: any, index) => button.addEventListener("click", function (ev) {
+            const onPhone = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0) <= 800;
+            const row = Math.floor(index / (onPhone ? 2 : 3));
+            // Only disable clicked
+            if (button.active) {
+                button.active = false;
+                button.classList.remove("active");
+                button.nextElementSibling.classList.remove("active");
+            } 
+            // Change active artist
+            else {
+                buttons.forEach((btn: any) => {
+                    btn.classList.remove("active");
+                    btn.active = false;
+                    btn.nextElementSibling.classList.remove("active");
+                });
+                button.classList.add("active");
+                button.active = true;
+                button.nextElementSibling.classList.add("active");
+                button.nextElementSibling.style.gridRow = `${row + 2} / ${row + 3}`;
+            }
+            ev.preventDefault();
+        }));
+        if (!!window.location.hash) {
+            handleHash();
+        }
+    });
+</script>
 <Layout title="Fancy Spirits: Artists" route="artists">
     <div class="wrapper">
         <main>

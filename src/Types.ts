@@ -31,6 +31,7 @@ export type Release = {
 };
 
 export type ArtistDetailed =  {
+    id: string;
     name: string;
     imageSrc: string;
     links: SocialLink[];

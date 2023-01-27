@@ -210,7 +210,6 @@ artistReleases.sort((release1, release2) => {
     }
     
     .releases .release-img-a:hover {
-        transition: 0.5s;
         transform: translateY(-0.75em);
     }
 
@@ -306,35 +305,16 @@ artistReleases.sort((release1, release2) => {
         .container-details .artist-image-name h2 {
             animation: none;
         }
+
+        .releases .release-img-a:hover {
+            transform: translateY(0);
+        }
+
+        .releases .release-img-a:hover .release-img {
+            box-shadow: 0.15em 0.15em 0.5em rgba(0,0,0,0.45);
+        }
     }
 </style>
-<script>
-    const buttons = document.querySelectorAll(".artist-toggle");
-    buttons.forEach((button: any, index) => button.addEventListener("click", () => {
-        const onPhone = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0) <= 800;
-        const row = Math.floor(index / (onPhone ? 2 : 3));
-        // Only disable clicked
-        if (button.active) {
-            button.active = false;
-            button.classList.remove("active");
-            button.nextElementSibling.classList.remove("active");
-        } 
-        // Change active artist
-        else {
-            buttons.forEach((btn: any) => {
-                btn.classList.remove("active");
-                btn.active = false;
-                btn.nextElementSibling.classList.remove("active");
-            });
-            button.classList.add("active");
-            button.active = true;
-            button.nextElementSibling.classList.add("active");
-            button.nextElementSibling.style.gridRow = `${row + 2} / ${row + 3}`;
-        }
-    }));
-</script>
-
-
 
 <div class="artist-toggle">
     <a class="artist-toggle-a">
@@ -343,7 +323,7 @@ artistReleases.sort((release1, release2) => {
     </a>
 </div>
 <Card class="artist-details">
-    <section class="container-details">
+    <section id={`${artist.id}-artist`} class="container-details">
         <div class="artist-image-name">
             <img src={artist.imageSrc} alt={artist.name} class:list={[{withBackground: backgroundColor !== undefined}]}>
             <h2>{artist.name}</h2>
