@@ -3,6 +3,7 @@ import Footer from '../components/Footer.astro';
 import NavBar from '../components/NavBar.astro';
 // import "@fontsource/ibm-plex-sans";
 import "../styles/Base.css";
+import { ArtistDetailed, Release } from '../Types';
 
 export interface Props {
 	title: string;
@@ -10,6 +11,16 @@ export interface Props {
 }
 
 const { title, route } = Astro.props;
+
+const artistNames = await Astro.glob<ArtistDetailed>("../contentData/artists/*.mdx").then(
+    artists => artists.map(artist => artist.frontmatter)
+		.map(artist => artist.name).join(",")
+);
+
+const releaseNames = await Astro.glob<Release>("../contentData/releases/**/*.mdx").then(
+	releases => releases.map(release => release.frontmatter)
+		.map(release => release.name).join(",")
+);
 ---
 
 <!DOCTYPE html>
@@ -19,6 +30,12 @@ const { title, route } = Astro.props;
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/logos/Logo Squared.svg" />
 		<meta name="generator" content={Astro.generator} />
+		<meta name="description" content="Fancy Spirits is an independent music label founded by a passionate artist collective. Our mission is to create a community that is dedicated to the field of electronic music, embracing all genres within it." />
+		<meta name="author" content="Konrad Koschel" />
+		<meta name="keywords" content={`Fancy Spirits,Music Label,Independent,${artistNames},${releaseNames},Drum and Bass,Chill,Dubstep,House`} />
+		<meta name="color-scheme" content="light" />
+
+
 		<title>{title}</title>
 	</head>
 	<body>
