@@ -4,7 +4,7 @@ import SocialBar from '../components/SocialBar.astro';
 import Layout from '../layouts/BaseLayout.astro';
 import { ArtistDetailed, Release } from '../Types';
 
-const releases = await Astro.glob<Release>("../content/releases/**/*.mdx").then(
+const releases = await Astro.glob<Release>("../contentData/releases/**/*.mdx").then(
     releases => releases.map(release => release.frontmatter).filter(release => !(release as any).draft)
 );
 
@@ -21,7 +21,7 @@ function formatReleaseDate(release: Release) {
 
 const releaseArtistsGetter = async (release: Release) => {
     const releaseArtists = release.artists.split(",").map(artist => artist.trim());
-    return Astro.glob<ArtistDetailed>("../content/artists/*.mdx").then(
+    return Astro.glob<ArtistDetailed>("../contentData/artists/*.mdx").then(
         artists => artists.map(artist => artist.frontmatter).filter(artist => !(artist as any).draft).filter(artist => releaseArtists.includes(artist.name))
     );
 }

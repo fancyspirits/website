@@ -41,6 +41,7 @@
     padding: 0;
     box-sizing: border-box;
     font-family: "IBM Plex Sans";
+    line-height: 150%;
 }
 
 main {
@@ -57,4 +58,13 @@ main {
 
 body {
     background-color: #f7f7f7;
+}
+
+ul, li {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
 }

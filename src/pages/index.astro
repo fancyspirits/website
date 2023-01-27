@@ -1,13 +1,13 @@
 ---
 import Card from '../components/Card.astro';
 import Layout from '../layouts/BaseLayout.astro';
-import AboutLabel from '../content/about-label.mdx'
+import AboutLabel from '../contentData/about-label.mdx'
 import RecentReleaseLayout from '../components/RecentRelease.astro';
-import LabelLinks from '../content/LabelLinks.mdx';
+import LabelLinks from '../contentData/LabelLinks.mdx';
 import ArtistsBar from '../components/ArtistsBar.astro';
 import { Release } from '../Types';
 
-const releases = await Astro.glob<Release>("../content/releases/**/*.mdx").then(
+const releases = await Astro.glob<Release>("../contentData/releases/**/*.mdx").then(
 	releases => releases.map(release => release.frontmatter).filter(release => !(release as any).draft)
 );
 
@@ -45,14 +45,14 @@ const recentReleases = releases.slice(0, 3);
 		width: 80%;
     }
 
-	h2 {
-		font-weight: 600;
-		font-size: 1.5rem;
-		margin-bottom: 0.5em;
-	}
-
 	.about {
 		grid-area: about;
+	}
+
+	.about .card-headers {
+		font-weight: 600;
+		font-size: 1.5rem !important;
+		margin-bottom: 0.5em;
 	}
 
 	.new-releases {
@@ -80,10 +80,13 @@ const recentReleases = releases.slice(0, 3);
 	}
 
 	.label-logo-full {
+		display: flex;
+		justify-content: center;
+	}
+
+	.label-logo-full img {
 		margin-top: 2em;
 		width: 80%;
-		margin-left: auto;
-		margin-right: auto;
 	}
 
 	@media screen and (max-width: 800px) {
@@ -160,12 +163,14 @@ const recentReleases = releases.slice(0, 3);
 		<h1>Fancy Spirits</h1>
 		<main>
 			<Card class="about">
-				<h2>Our Label</h2>
+				<h2 class="card-headers">Our Label</h2>
 				<div class="img-wrap">
 					<img class="label-logo" src="/logos/Logo Squared.svg" />
 				</div>
 				<AboutLabel />
-				<img class="label-logo-full" src="/logos/Logo Full.png">
+				<div class="label-logo-full">
+					<img src="/logos/Logo Full.png">
+				</div>
 			</Card>
 			<Card class="new-releases" title="Recent Releases">
 				{recentReleases.map(release => 

@@ -16,7 +16,7 @@ const youtubeLink = release.links.find(release => release.name.toLowerCase() ===
     <section class="inner">
         <span class="release-name">{release.name}</span>
         <span class="artists">{release.artists}</span>
-        {youtubeLink && <a href={youtubeLink.url} target="_blank"><img src="social/youtube.png"> <ColoredText class="youtube-link" textColor="#dd0000">Watch on Youtube</ColoredText></a>}
+        {youtubeLink && <a href={youtubeLink.url} target="_blank" class="link"><img src="social/youtube.png"> <ColoredText class="youtube-link" textColor="#dd0000">Watch on Youtube</ColoredText></a>}
     </section>
 </section>
 <style>
@@ -57,11 +57,18 @@ const youtubeLink = release.links.find(release => release.name.toLowerCase() ===
         filter: saturate(110%);
     }
 
+    a.link {
+        display: flex;
+        justify-content: start;
+        align-items: center;
+    }
+
     a > img {
         width: 1.75em;
         display: inline;
         filter: saturate(95%);
         transition: 0.5s;
+        margin-right: 0.33em;
     }
 
     a:hover > img {

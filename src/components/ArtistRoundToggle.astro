@@ -10,7 +10,7 @@ export interface Props {
 const { artist } = Astro.props;
 const backgroundColor = artist.backgroundColor;
 
-const artistReleases = await Astro.glob<Release>("../content/releases/**/**.mdx").then(
+const artistReleases = await Astro.glob<Release>("../contentData/releases/**/**.mdx").then(
     releases => releases.map(release => release.frontmatter).filter(release => release.artists.includes(artist.name)).filter(release => !(release as any).draft)
 );
 
