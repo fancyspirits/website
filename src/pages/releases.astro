@@ -9,13 +9,13 @@ const releases = await Astro.glob<Release>("../contentData/releases/**/*.mdx").t
 );
 
 releases.sort((release1, release2) => {
-    const date1 = new Date(release1.releaseDate.year, release1.releaseDate.month, release1.releaseDate.day);
-    const date2 = new Date(release2.releaseDate.year, release2.releaseDate.month, release2.releaseDate.day);
+    const date1 = new Date(release1.releaseDate.year, release1.releaseDate.month - 1, release1.releaseDate.day);
+    const date2 = new Date(release2.releaseDate.year, release2.releaseDate.month - 1, release2.releaseDate.day);
     return date2.getTime() - date1.getTime();
 });
 
 function formatReleaseDate(release: Release) {
-    const date = new Date(release.releaseDate.year, release.releaseDate.month, release.releaseDate.day);
+    const date = new Date(release.releaseDate.year, release.releaseDate.month - 1, release.releaseDate.day);
     return date.toLocaleDateString();
 }
 
