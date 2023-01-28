@@ -7,6 +7,8 @@ jobs:
   build_preview:
     if: ${{github.event.pull_request.draft == true}}
     runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
     steps:
       - name: Install Node.js
         uses: actions/setup-node@v3
@@ -41,6 +43,7 @@ jobs:
         run: pnpm run build
       
       - name: Deploy to Firebase
+        id: firebase_deploy
         uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
@@ -48,3 +51,9 @@ jobs:
           channelId: ${{ github.event.pull_request.head.ref }}
           projectId: fancy-spirits
           expires: 2d
+      
+      - name: Add Comment for Preview URL
+        uses: mshick/add-pr-comment@v2
+        with:
+          message: |
+            Preview is available at ${{ steps.firebase_deploy.outputs.urls }}
