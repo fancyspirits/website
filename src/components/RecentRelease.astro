@@ -75,4 +75,14 @@ const youtubeLink = release.links.find(release => release.name.toLowerCase() ===
         filter: saturate(110%);
         transform: translateY(-0.15em);
     }
+
+    @media (prefers-color-scheme: dark) {
+        .artists {
+            color: #999;
+        }
+
+        .youtube-link {
+            font-weight: 600;
+        }
+    }
 </style>

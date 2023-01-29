@@ -157,6 +157,16 @@ const recentReleases = releases.slice(0, 3);
 			grid-area: artists-bar;
 		}
 	}
+
+	@media (prefers-color-scheme: dark) {
+		.label-logo {
+			filter: invert()
+		}
+
+		.label-logo-full {
+			filter: invert()
+		}
+	}
 </style>
 <Layout title="Fancy Spirits">
 	<section class="wrapper">
