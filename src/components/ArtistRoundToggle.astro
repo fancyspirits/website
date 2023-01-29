@@ -314,6 +314,19 @@ artistReleases.sort((release1, release2) => {
             box-shadow: 0.15em 0.15em 0.5em rgba(0,0,0,0.45);
         }
     }
+
+    @media (prefers-color-scheme: dark) {
+        .artist-toggle img {
+            border: solid 0.75px #222222;
+        }
+
+        .artist-toggle-a:hover > img {
+            border: solid 2px #eeeeee;
+        }
+        artist-toggle.active > .artist-toggle-a > img {
+            border: solid 2px #eeeeee;
+        }
+    }
 </style>
 
 <div class="artist-toggle">
