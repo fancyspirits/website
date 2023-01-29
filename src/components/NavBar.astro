@@ -20,9 +20,9 @@ const { route } = Astro.props;
         <li class={route === "releases" ? "active" : ""}>
             <a href="/releases"><p>Releases</p></a>
         </li>
-        <li class={route === "demo" ? "active" : ""}>
+        <!-- <li class={route === "demo" ? "active" : ""}>
             <a href="/demo"><p>Submit Demo</p></a>
-        </li>
+        </li> -->
     </ul>
 </nav>
 <style>
@@ -110,6 +110,21 @@ const { route } = Astro.props;
 
         nav {
             height: 3.5rem;
+        }
+    }
+
+    @media (prefers-color-scheme: dark) {
+        nav {
+            background-color: #191919;
+            border-bottom: 1px solid #999999;
+        }
+
+        li:hover, li.active {
+            background-color: #555555;
+        }
+
+        li:hover img {
+            filter: invert()
         }
     }
 </style>

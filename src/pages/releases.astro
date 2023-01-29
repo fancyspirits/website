@@ -354,6 +354,26 @@ for (const release of releases) {
         }
 
     }
+
+    @media (prefers-color-scheme: dark) {
+        .release-image img {
+            box-shadow: 5px 5px 7px rgba(30,30,30,0.95),
+                -1px -1px 4px rgba(50,50,50,0.6);
+        }
+
+        .release-image img:hover {
+            box-shadow: 10px 10px 15px rgba(30,30,30,0.95),
+                -2px -2px 8px rgba(50,50,50,0.6);
+        }
+
+        .release-info .artists .artist-img {
+            border: solid 0.75px #222222;
+            box-shadow: 0.05em 0.05em 0.15em rgba(0, 0, 0, 0.25);
+        }
+        .release-info .artists .artist-link:hover .artist-img {
+            box-shadow: 0.1em 0.125em 0.15em rgba(50, 50, 50, 0.3);
+        }
+    }
 </style>
 <Layout title="Fancy Spirits: Releases" route="releases">
     <div class="wrapper">

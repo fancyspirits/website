@@ -47,4 +47,10 @@ const { frontmatter: { links } } = Astro.props;
     a:hover > .linkText {
         filter: saturate(110%);
     }
+
+    @media (prefers-color-scheme: dark) {
+        .linkText {
+            font-weight: 600;
+        }
+    }
 </style>

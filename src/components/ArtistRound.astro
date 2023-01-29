@@ -75,6 +75,17 @@ const backgroundColor = artist.backgroundColor;
     a:hover > em {
         transform: scale(1.05);
     }
+
+    @media (prefers-color-scheme: dark) {
+
+        img {
+            border: solid 0.75px #222222;
+        }
+
+        a:hover > img {
+            border: solid 2px #eeeeee;
+        }
+    }
 </style>
 <div>
     <a href={`/artists#${artist.id}-artist`}>
