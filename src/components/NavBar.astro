@@ -112,4 +112,15 @@ const { route } = Astro.props;
             height: 3.5rem;
         }
     }
+
+    @media (prefers-color-scheme: dark) {
+        nav {
+            background-color: #191919;
+            border-bottom: 1px solid #999999;
+        }
+
+        li:hover, li.active {
+            background-color: #555555;
+        }
+    }
 </style>
