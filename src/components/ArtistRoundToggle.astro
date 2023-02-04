@@ -2,9 +2,10 @@
 import SocialBar from "../components/SocialBar.astro";
 import Card from "./Card.astro";
 import { ArtistDetailed, Release } from "../Types";
+import { AstroComponentFactory } from "astro/dist/runtime/server";
 
 export interface Props {
-    artist: ArtistDetailed
+    artist: ArtistDetailed,
 };
 
 const { artist } = Astro.props;
@@ -232,6 +233,9 @@ artistReleases.sort((release1, release2) => {
         line-height: 200%;
         font-weight: 300;
         padding-right: 1em;
+        margin-top: 1em;
+        margin-bottom: 1em;
+        background-color: red !important;
     }
 
     .container-details .social-links {
@@ -329,6 +333,16 @@ artistReleases.sort((release1, release2) => {
     }
 </style>
 
+<style is:inline>
+    .container-details .artist-description p {
+        line-height: 200%;
+        font-weight: 300;
+        padding-right: 1em;
+        margin-top: 0.5em;
+        margin-bottom: 0.5em;
+    } 
+</style>
+
 <div class="artist-toggle">
     <a class="artist-toggle-a">
         <img src={artist.imageSrc} alt={artist.name} class:list={[{withBackground: backgroundColor !== undefined}]}>
@@ -341,7 +355,8 @@ artistReleases.sort((release1, release2) => {
             <img src={artist.imageSrc} alt={artist.name} class:list={[{withBackground: backgroundColor !== undefined}]}>
             <h2>{artist.name}</h2>
         </div>
-        <div class="artist-description"><p>{artist.description}</p></div>
+        <div class="artist-description" set:html={artist.description}></div>
+        <!-- <div class="artist-description"><p set:html={artist.description}></p></div> -->
         <div class="releases">
             {artistReleases.map((release, index) => <a class="release-img-a" href={`/releases#${release.id}-release`}><img class="release-img" style={`--release-index: ${index}`} src={release.imageSrc} /></a>)}
         </div>

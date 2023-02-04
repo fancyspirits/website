@@ -5,6 +5,7 @@ import { ArtistDetailed } from '../Types';
 
 const artists = await Astro.glob<ArtistDetailed>("../contentData/artists/*.mdx").then(
     artists => artists.map(artist => artist.frontmatter)
+    .filter(artist => !(artist as any).draft)
 );
 ---
 
