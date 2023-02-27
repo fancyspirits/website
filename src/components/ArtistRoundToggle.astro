@@ -125,7 +125,7 @@ artistReleases.sort((release1, release2) => {
         animation: artist-image 0.75s ease-in-out 0s;
     }
 
-    .container-details .artist-image-name img:hover {
+    .container-details .artist-image-name img.artist-image-clicked {
         border-radius: 1em;
         transform: scale(150%, 150%);
     }
@@ -292,7 +292,7 @@ artistReleases.sort((release1, release2) => {
     }
 
     @media (prefers-reduced-motion: reduce), (max-width: 800px) {
-        .container-details .artist-image-name img:hover {
+        .container-details .artist-image-name img.artist-image-clicked {
             border-radius: 50%;
             transform: scale(100%, 100%);
         }
@@ -365,3 +365,23 @@ artistReleases.sort((release1, release2) => {
         </section>
     </section>
 </Card>
+<script>
+    import {ClassWatcher} from "../../public/scripts/ClassWatcher";
+    
+    document.querySelectorAll<HTMLElement>(".artist-details")
+        .forEach(container => {
+            let image = container.querySelector(".artist-image-name img");
+            image.addEventListener(
+                "click",
+                e => {
+                    image.classList.toggle("artist-image-clicked");
+                    e.stopPropagation();
+                }
+            );
+            container.addEventListener(
+                "click",
+                () => image.classList.remove("artist-image-clicked")
+            );
+            const classWatcher = new ClassWatcher(container, "active", () => image.classList.remove("artist-image-clicked"));
+        });
+</script>
