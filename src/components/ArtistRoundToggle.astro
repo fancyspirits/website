@@ -210,8 +210,19 @@ artistReleases.sort((release1, release2) => {
         justify-self: center;
         border-radius: 0.75em;
         box-shadow: 0.15em 0.15em 0.5em rgba(0,0,0,0.45);
+        transition: 0.5s;
+
+        /* Animation default */
+        transform: scale(0);
+        opacity: 0;
+        filter: blur(1em) saturate(0%);
+    }
+
+    .releases .release-img.visible {
         animation: releases 1s ease-in calc(150ms * var(--release-index));
-        transition: 0.5s;;
+        transform: scale(1);
+        opacity: 1;
+        filter: blur(0) saturate(100%);
     }
 
     .releases .release-img-a {
@@ -227,13 +238,16 @@ artistReleases.sort((release1, release2) => {
     }
 
     @keyframes releases {
-        0% {
-            transform: translateX(15em);
+        from {
+            transform: scale(0);
+            opacity: 0;
+            filter: blur(1em) saturate(0%);
         }
-        
-        100% {
-            filter: blur(0);
-            transform: translateX(0);
+
+        to {
+            transform: scale(1);
+            opacity: 1;
+            filter: blur(0) saturate(100%);
         }
     }
 
@@ -243,7 +257,6 @@ artistReleases.sort((release1, release2) => {
         padding-right: 1em;
         margin-top: 1em;
         margin-bottom: 1em;
-        background-color: red !important;
     }
 
     .container-details .social-links {
@@ -392,6 +405,20 @@ artistReleases.sort((release1, release2) => {
                 "click",
                 () => image.classList.remove("artist-image-clicked")
             );
-            const classWatcher = new ClassWatcher(container, "active", () => image.classList.remove("artist-image-clicked"));
+            new ClassWatcher(container, "active", () => image.classList.remove("artist-image-clicked"));
+
+            const releaseImgs = container.querySelectorAll(".release-img");
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("visible");
+                        return;
+                    }
+                })
+            }, {
+                threshold: 0.9,
+                root: container
+            });
+            releaseImgs.forEach(img => observer.observe(img));
         });
 </script>
