@@ -25,7 +25,7 @@ export type Release = {
         month: number;
         day: number;
     };
-    embedYT: string;
+    embedYt: string;
     links: SocialLink[];
     tracks?: AlbumTrack[];
 };
