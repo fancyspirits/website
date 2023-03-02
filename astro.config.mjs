@@ -18,7 +18,9 @@ import prefetch from "@astrojs/prefetch";
 // https://astro.build/config
 export default defineConfig({
   site: "https://fancyspirits.net",
-  integrations: [mdx(), sitemap(), robotsTxt(), prefetch({
+  integrations: [mdx(), sitemap({
+    filter: (page) => page !== "https://fancyspirits.net/impressum"
+  }), robotsTxt(), prefetch({
     selector: "a[href^='/releases'], a[href^='/artists']"
   }), compress()]
 });

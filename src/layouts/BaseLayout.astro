@@ -8,9 +8,10 @@ import { ArtistDetailed, Release } from '../Types';
 export interface Props {
 	title: string;
 	route?: string;
+	noindex?: boolean;
 }
 
-const { title, route } = Astro.props;
+const { title, route, noindex = false } = Astro.props;
 
 const artistNames = await Astro.glob<ArtistDetailed>("../contentData/artists/*.mdx").then(
     artists => artists.map(artist => artist.frontmatter)
@@ -34,6 +35,7 @@ const releaseNames = await Astro.glob<Release>("../contentData/releases/**/*.mdx
 		<meta name="author" content="Konrad Koschel" />
 		<meta name="keywords" content={`Fancy Spirits,Music Label,Independent,${artistNames},${releaseNames},Drum and Bass,Chill,Dubstep,House`} />
 		<meta name="color-scheme" content="light" />
+		{noindex && <meta name="robots" content="noindex">}
 
 
 		<title>{title}</title>
