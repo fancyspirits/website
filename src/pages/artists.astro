@@ -26,6 +26,7 @@ const artists = await Astro.glob<ArtistDetailed>("../contentData/artists/*.mdx")
             });
             history.replaceState(null, null, " ");
         }
+        let previousArtist: HTMLElement | undefined;
         const buttons = document.querySelectorAll(".artist-toggle");
         buttons.forEach((button: any, index) => button.addEventListener("click", function (ev) {
             const onPhone = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0) <= 800;
@@ -35,6 +36,7 @@ const artists = await Astro.glob<ArtistDetailed>("../contentData/artists/*.mdx")
                 button.active = false;
                 button.classList.remove("active");
                 button.nextElementSibling.classList.remove("active");
+                button.nextElementSibling.querySelectorAll(".visible").forEach(element => element.classList.remove("visible"));
             } 
             // Change active artist
             else {
@@ -42,11 +44,13 @@ const artists = await Astro.glob<ArtistDetailed>("../contentData/artists/*.mdx")
                     btn.classList.remove("active");
                     btn.active = false;
                     btn.nextElementSibling.classList.remove("active");
+                    btn.nextElementSibling.querySelectorAll(".visible").forEach(element => element.classList.remove("visible"));
                 });
                 button.classList.add("active");
                 button.active = true;
                 button.nextElementSibling.classList.add("active");
                 button.nextElementSibling.style.gridRow = `${row + 2} / ${row + 3}`;
+                button.nextElementSibling.querySelectorAll(".release-img").forEach(element => element.classList.add("visible"));
             }
             ev.preventDefault();
         }));

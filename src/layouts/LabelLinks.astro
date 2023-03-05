@@ -14,6 +14,14 @@ const { frontmatter: { links } } = Astro.props;
     {links.map(link => <li><a href={link.url} target="_blank"> <img src={link.icon}> <ColoredText class="linkText" textColor={link.textColor}>{link.name}</ColoredText></a></li>)}
 </ul>
 <style>
+
+    ul {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        gap: 1.25em;
+    }
+
     img {
         width: 1.75em;
         display: inline;
@@ -34,7 +42,6 @@ const { frontmatter: { links } } = Astro.props;
     }
 
     li {
-        padding: 0.5em 0em;
         height: fit-content;
     }
 
