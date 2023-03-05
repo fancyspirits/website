@@ -14,14 +14,20 @@ const { title, class: className } = Astro.props;
         box-shadow: -10px -10px 15px rgba(255,255,255,0.5),
             10px 10px 15px rgba(70,70,70,0.12),
             -1px -1px 4px rgba(0,0,0,0.1);
-        transition: 1s;
+        transition: 1s ease-in-out;
+        display: grid;
+        grid-template-rows: fit-content 1fr;
     }
 
     section:hover {
-        box-shadow: -20px -20px 30px rgba(255,255,255,0.5),
-            20px 20px 30px rgba(70,70,70,0.12),
-            -2px -2px 8px rgba(0,0,0,0.1);
-        transform: scale(101%, 101%);
+        box-shadow: -15px -15px 22px rgba(255,255,255,0.5),
+            15 15px 22px rgba(70,70,70,0.12),
+            -2px -2px 6px rgba(0,0,0,0.1);
+        transform: scale(100.125%, 100.125%);
+    }
+
+    article {
+        align-items: center;
     }
 
     h3 {
