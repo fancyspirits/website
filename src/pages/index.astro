@@ -59,8 +59,22 @@ const recentReleases = releases.slice(0, 3);
 		grid-area: new-releases;
 	}
 
+	.new-releases .new-releases-wrap {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-around;
+		height: 100%;
+	}
+
 	.links {
 		grid-area: links;
+	}
+
+	.links-wrap {
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-start;
+		height: 100%;
 	}
 
 	.artists-bar {
@@ -183,12 +197,16 @@ const recentReleases = releases.slice(0, 3);
 				</div>
 			</Card>
 			<Card class="new-releases" title="Recent Releases">
-				{recentReleases.map(release => 
-				<RecentReleaseLayout release={release} />
-				)}
+				<div class="new-releases-wrap">
+					{recentReleases.map(release => 
+					<RecentReleaseLayout release={release} />
+					)}
+				</div>
 			</Card>
 			<Card class="links" title="Links">
-				<LabelLinks />
+				<div class="links-wrap">
+					<LabelLinks />
+				</div>
 			</Card>
 			<section class="artists-bar">
 				<ArtistsBar></ArtistsBar>
