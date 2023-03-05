@@ -34,6 +34,8 @@ const recentReleases = releases.slice(0, 3);
 			"about about new-releases"
 			"about about links"
 			"artists-bar artists-bar artists-bar";
+
+		grid-template-rows: fit-content min-content fit-content;
 		gap: 1em;
 		width: 85%;
 	}
@@ -100,7 +102,7 @@ const recentReleases = releases.slice(0, 3);
 
 	.label-logo-full img {
 		margin-top: 2em;
-		width: 80%;
+		max-height: 15em;
 	}
 
 	@media screen and (max-width: 800px) {
@@ -187,7 +189,7 @@ const recentReleases = releases.slice(0, 3);
 		<h1>Fancy Spirits</h1>
 		<main>
 			<Card class="about">
-				<h2 class="card-headers">Our Label</h2>
+				<h2 class="card-headers">About our Label</h2>
 				<div class="img-wrap">
 					<img class="label-logo" src="/logos/Logo Squared.svg" />
 				</div>
