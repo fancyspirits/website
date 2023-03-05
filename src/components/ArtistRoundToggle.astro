@@ -219,7 +219,8 @@ artistReleases.sort((release1, release2) => {
     }
 
     .releases .release-img.visible {
-        animation: releases 1s ease-in calc(150ms * var(--release-index));
+        animation: releases 1s ease-in-out;
+        /* animation: releases 1s ease-in calc(150ms * var(--release-index)); */
         transform: scale(1);
         opacity: 1;
         filter: blur(0) saturate(100%);
@@ -329,8 +330,9 @@ artistReleases.sort((release1, release2) => {
         .releases .release-img, 
         .releases .release-img-a, 
         .container-details .artist-description, 
+        .release-img,
         .container-details .artist-image-name h2 {
-            animation: none;
+            animation: none !important;
         }
 
         .releases .release-img-a:hover {
