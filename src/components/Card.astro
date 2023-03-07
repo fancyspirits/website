@@ -2,9 +2,10 @@
 export interface Props {
     title?: string;
     class: string;
+    overflow?: boolean;
 };
 
-const { title, class: className } = Astro.props;
+const { title, class: className, overflow = false } = Astro.props;
 ---
 <style>
     section {
@@ -30,9 +31,12 @@ const { title, class: className } = Astro.props;
     article {
         align-self: center;
         width: 100%;
-        overflow: hidden;
         max-width: 100%;
         word-wrap: break-word;
+    }
+
+    article.overflow {
+        overflow: hidden;
     }
 
     h3 {
@@ -59,7 +63,7 @@ const { title, class: className } = Astro.props;
 </style>
 <section class={className}> 
     <h3>{title}</h3>
-    <article>
+    <article class:list={[{"overflow": overflow}]}>
         <slot />
     </article>
 </section>

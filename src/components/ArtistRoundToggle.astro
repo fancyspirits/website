@@ -133,8 +133,10 @@ artistReleases.sort((release1, release2) => {
     }
 
     .container-details .artist-image-name img.artist-image-clicked {
+        /* position: absolute; */
         border-radius: 1em;
         transform: scale(150%, 150%);
+        z-index: 100;
     }
 
     @keyframes artist-image {
