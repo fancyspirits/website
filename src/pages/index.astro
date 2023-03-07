@@ -27,7 +27,7 @@ const recentReleases = releases.slice(0, 3);
 		padding-top: 1.75em;
 	}
 
-	main {
+	.main {
 		display: grid;
 		grid-template-columns: repeat(3, 1fr);
 		grid-template-areas:
@@ -107,9 +107,10 @@ const recentReleases = releases.slice(0, 3);
 	}
 
 	@media screen and (max-width: 800px) {
-		main {
+		.main {
 			display: grid;
-			grid-template-columns: repeat(1, 1fr);
+			/* grid-template-columns: repeat(1, 1fr); */
+			grid-template-columns: 100%;
 			grid-template-areas:
 				"artists-bar"
 				"about"
@@ -140,6 +141,10 @@ const recentReleases = releases.slice(0, 3);
 		.artists-bar.artists-bar::-webkit-scrollbar {
 			display: none;
 		}
+
+		.img-wrap {
+			margin-top: 1.5em;
+		}
 	}
 	@media screen and (max-width: 1000px) and (min-width: 800px) {
 		
@@ -147,7 +152,7 @@ const recentReleases = releases.slice(0, 3);
 			padding-top: 0em;
 		}
 
-		main {
+		.main {
 			display: grid;
 			grid-template-columns: repeat(3, 1fr);
 			grid-template-areas:
@@ -188,12 +193,14 @@ const recentReleases = releases.slice(0, 3);
 <Layout title="Fancy Spirits">
 	<section class="wrapper">
 		<h1>Fancy Spirits</h1>
-		<main>
+		<main class="main">
 			<Card class="about" title="About our Label">
 				<div class="img-wrap">
 					<img class="label-logo" src="/logos/Logo Squared.svg" />
 				</div>
-				<AboutLabel />
+				<div class="about-label">
+					<AboutLabel />
+				</div>
 				<div class="label-logo-full">
 					<img src="/logos/Logo Full.png">
 				</div>
