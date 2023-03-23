@@ -19,7 +19,70 @@ releases.sort((release1, release2) => {
 
 const recentReleases = releases.slice(0, 3);
 ---
+<!-- <script>
+	document.querySelector(".april div").addEventListener("click", () => {
+		document.querySelector(".april").classList.add("closed");
+	});
+</script> -->
 <style>
+
+	/* .april {
+		background-color: #dd4435;
+		font-size: 1.5em;
+		padding: 1em 2em;
+		width: 100%;
+		margin-bottom: 1.5em;
+		border-radius: 1em;
+		font-weight: 200;
+		position: relative;
+		box-shadow: 0.2em 0.2em 1em rgba(0, 0, 0, 0.2);
+		color: white;
+	}
+
+	.april br {
+		display: none;
+	}
+
+	@media(prefers-color-scheme: dark) {
+		.april, .april .april-pre, .april div, .april-colon {
+			color: black;
+		}
+	}
+
+	@media(max-width: 800px) {
+		.april br {
+			display: initial;
+		}
+
+		.april {
+			line-height: 2em;
+			text-align: center;
+		}
+
+		.april-colon {
+			display: none;
+		}
+	}
+
+	.april.closed {
+		display: none;
+	}
+
+	.april div {
+		position: absolute;
+		right: 1em;
+		top: 0;
+		height: 100%;
+		display: flex;
+		align-items: center;
+		cursor: pointer;
+	}
+
+	.april .april-pre {
+		font-weight: 600;
+		margin-right: 0.5em;
+	} */
+
 	.wrapper {
 		display: flex;
 		flex-direction: column;
@@ -226,6 +289,10 @@ const recentReleases = releases.slice(0, 3);
 </style>
 <Layout title="Fancy Spirits">
 	<section class="wrapper">
+		<!-- <div class="april">
+			<span class="april-pre">Awesome News<span class="april-colon">:</span> </span> <br>We launched our official merch shop. <br>Check it out!
+			<div>X</div>
+		</div> -->
 		<h1>Fancy Spirits</h1>
 		<main class="main">
 			<Card class="about" title="About our Label" overflow={true}>
