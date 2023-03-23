@@ -57,6 +57,36 @@ const recentReleases = releases.slice(0, 3);
 		margin-bottom: 0.5em;
 	}
 
+	.demo-caption {
+		display: block;
+		text-align: center;
+		margin-top: 1em;
+	}
+
+	.demo-btn-wrapper {
+		display: flex;
+		justify-content: center;
+		margin-top: 1.5em;
+	}
+
+	.demo-btn {
+		/* display: block; */
+		color: white;
+		padding: 0.75em 2em;
+		background-color: #dd4435;
+		border: none;
+		border-radius: 1em;
+		text-align: center;
+		font-weight: 600;
+		transition: 0.75s;
+		box-shadow: 0.2em .2em 1em rgba(0, 0, 0, 0.1);
+	}
+
+	.demo-btn:hover {
+		transform: translateY(-0.5em) scale(1.025);
+		background-color: #ff4435;
+	}
+
 	.new-releases {
 		grid-area: new-releases;
 	}
@@ -145,6 +175,10 @@ const recentReleases = releases.slice(0, 3);
 		.img-wrap {
 			margin-top: 1.5em;
 		}
+
+		.demo-btn:hover {
+			transform: none;
+		}
 	}
 	@media screen and (max-width: 1000px) and (min-width: 800px) {
 		
@@ -200,6 +234,13 @@ const recentReleases = releases.slice(0, 3);
 				</div>
 				<div class="about-label">
 					<AboutLabel />
+					<br>
+					<strong class="demo-caption">You want to join us on our journey and be part of the Fancy Spirits Community?</strong>
+					<div class="demo-btn-wrapper">
+						<a href="/demo" class="demo-btn">
+							Submit a Demo
+						</a>
+					</div>
 				</div>
 				<div class="label-logo-full">
 					<img src="/logos/Logo Full.png">
