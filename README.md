@@ -76,3 +76,7 @@ In `src/contentData/about-label.mdx`, there are the Fancy Spirits-related links.
 # Attention
 
 Don't touch any other files without aligning with me. We don't want our website to be broken. If there are ideas/wishes, don't hesitate to ask me via Discord!
+
+
+
+sheesh lool test
