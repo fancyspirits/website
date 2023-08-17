@@ -464,7 +464,7 @@ for (const release of releases) {
                         {(release as any).artistObjects.map((artist: ArtistDetailed) => <a class="artist-link" href={`/artists#${artist.id}-artist`}><img class="artist-img" src={artist.imageSrc} style={artist.backgroundColor && `background-color: ${artist.backgroundColor}`}/></a>)}
                     </div>
                     <div class="release-date">
-                        <span>Released at<br class="hide-on-mobile">&nbsp;{formatReleaseDate(release)}</span>
+                        <span>Released on<br class="hide-on-mobile">&nbsp;{formatReleaseDate(release)}</span>
                     </div>
                     <div class="release-links">
                         <SocialBar links={release.links} before={`Stream ${release.tracks ? "Album" : "now"}`}></SocialBar>
