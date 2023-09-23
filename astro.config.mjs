@@ -19,7 +19,7 @@ import prefetch from "@astrojs/prefetch";
 export default defineConfig({
   site: "https://fancyspirits.net",
   integrations: [mdx(), sitemap({
-    filter: (page) => page !== "https://fancyspirits.net/impressum"
+    filter: page => page !== "https://fancyspirits.net/impressum"
   }), robotsTxt(), prefetch({
     selector: "a[href^='/releases'], a[href^='/artists']"
   }), compress()]
