@@ -1,1 +1,3 @@
-@prscheduler 07/07/2023T00:00 GMT+2
+Add a comment to schedule PR merge:
+
+@prscheduler dd/mm/yyyyT00:00 GMT+2
