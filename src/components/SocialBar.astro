@@ -22,9 +22,9 @@ const {
 } = Astro.props;
 ---
 <div class:list={["wrap-social", className]}>
-    {before && <div class="mobile"><p>{before}: </p></div>}
+    {before && links.length > 0 && <div class="mobile"><p>{before}: </p></div>}
     <ul>
-        {before && <li class="first"><p>{before}: </p></li>}
+        {before && links.length > 0 && <li class="first"><p>{before}: </p></li>}
         {links.map(link => <li class:list={[{"marginRight": marginRight, "marginLeft": marginLeft}]}><a href={link.url} target="_blank"><img src={link.icon} alt={link.name} /></a></li>)}
     </ul>
 </div>
