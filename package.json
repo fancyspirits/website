@@ -11,11 +11,11 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/mdx": "^0.15.1",
-    "@astrojs/prefetch": "^0.1.1",
-    "@astrojs/sitemap": "^1.0.0",
+    "@astrojs/mdx": "^2.3.1",
+    "@astrojs/prefetch": "^0.4.1",
+    "@astrojs/sitemap": "^3.1.4",
     "@fontsource/ibm-plex-sans": "^4.5.13",
-    "astro": "^2.0.2",
+    "astro": "^4.7.1",
     "astro-compress": "^2.0.12",
     "astro-robots-txt": "^0.3.11",
     "sass": "^1.56.1",
