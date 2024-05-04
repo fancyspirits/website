@@ -4,45 +4,106 @@ import Layout from '../layouts/BaseLayout.astro';
 ---
 
 <Layout title="Fancy Spirits: Submit Music" route="demo">
-  <section class="wrapper">
-    <h1>Submit your Demo now</h1>
-    <main class="main">
-      <div class="submission-form">
-        <h2>Submit Your Track</h2>
-        <form @submit.prevent="submitForm">
-          <div v-for="(track, index) in tracks" :key="index">
-            <h3>Track {{ index + 1 }}</h3>
-            <label for="track_title">Track Title:</label>
-            <input type="text" v-model="track.title" required>
+    <section class="wrapper">
+      <h1>Submit your music</h1>
+      <p> At Fancy Spirits, we are always on the lookout for fresh and exciting music submissions that push the boundaries and challenge the norms of the electronic music scene. We believe in supporting small artists and providing a platform for emerging talents to showcase their creativity and passion, regardless of whether it's their first release or not.
+We value innovation, originality, and skill, and we welcome submissions from artists who are dedicated to crafting unique and compelling sounds. Whether you're experimenting with new genres, blending styles, or pushing the limits of conventional production techniques, we want to hear from you.
+ So, if you're ready to share your musical vision with the world, don't hesitate to submit your tracks. We can't wait to hear what you've got! </p>
+    </section>
 
-            <label for="artist_name">Artist Name(s):</label>
-            <input type="text" v-model="track.artist" required>
+      <main class="main">
+        <Card class="submission">
+            <div class="submission-form">
+            <h2>Submit Your Track</h2>
+            <form @submit.prevent="submitForm">
+                <div v-for="(track, index) in tracks" :key="index">
+                <!-- <h3>Track { index + 1 }: </h3> -->
+                <h3>Track index: </h3>
+                <label for="track_title">Track Title:</label>
+                <input type="text" v-model="track.title" required class="input-field">
+    
+                <label for="artist_name">Artist Name(s):</label>
+                <input type="text" v-model="track.artist" required class="input-field">
+    
+                <label for="file_url">File URL:</label>
+                <input type="url" v-model="track.file_url" required class="input-field">
+                <small>(File must be stream and downloadable)</small>
+    
+                <br>
 
-            <label for="file_url">File URL:</label>
-            <input type="url" v-model="track.file_url" required>
-            <small>(File must be a stream and downloadable)</small>
+                <button type="button" @click="removeTrack(index)" v-if="index > 0" class="remove-button">Remove Track</button> 
+                <p>todo: add space here</p>
+                <hr>
+                </div>
+                
+                <button type="button" @click="addTrack" v-if="tracks.length < 5" class="add-button">Add Track</button>
+    
+                <label for="email">Email Address:</label>
+                <input type="email" v-model="submission.email" required class="input-field">
+    
+                <label for="about_artist">About Yourself (Optional):</label>
+                <textarea v-model="submission.about_artist" class="text-area"></textarea>
+    
+                <button type="submit" class="submit-button">Submit</button>
+            </form>
+            </div>
+        </Card>
+      </main>
+    </section>
+  </Layout>
+  
+<style>
+    .input-field, .text-area {
+    width: 100%;
+    padding: 0.5em;
+    margin-bottom: 1em;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    }
 
-            <button type="button" @click="removeTrack(index)" v-if="index > 0">Remove Track</button>
-            <hr>
-          </div>
-          
-          <button type="button" @click="addTrack" v-if="tracks.length < 5">Add Track</button>
+    .remove-button, .add-button, .submit-button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 0.5em 1em;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    }
 
-          <label for="email">Email Address:</label>
-          <input type="email" v-model="submission.email" required>
+    .remove-button:hover, .add-button:hover, .submit-button:hover {
+    background-color: #45a049;
+    }
 
-          <label for="about_artist">About Yourself (Optional):</label>
-          <textarea v-model="submission.about_artist"></textarea>
+    .remove-button {
+    background-color: #f44336;
+    }
 
-          <button type="submit">Submit</button>
-        </form>
-      </div>
-    </main>
-  </section>
-</Layout>
+    .remove-button:hover {
+    background-color: #da190b;
+    }
 
-<script setup>
+    .add-button {
+    background-color: #008CBA;
+    }
+
+    .add-button:hover {
+    background-color: #0077A3;
+    }
+
+    .submit-button {
+    background-color: #4CAF50;
+    }
+
+    .submit-button:hover {
+    background-color: #45a049;
+    }
+
+</style>
+
+<script>
 import { ref } from 'vue';
+
+let index = 0;
 
 const tracks = ref([
   { title: '', artist: '', file_url: '' }
