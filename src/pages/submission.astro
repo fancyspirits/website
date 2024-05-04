@@ -1,0 +1,117 @@
+---
+import Card from '../components/Card.astro';
+import Layout from '../layouts/BaseLayout.astro';
+---
+
+<Layout title="Fancy Spirits: Submit Music" route="demo">
+  <section class="wrapper">
+    <h1>Submit your Demo now</h1>
+    <main class="main">
+      <div class="submission-form">
+        <h2>Submit Your Track</h2>
+        <form @submit.prevent="submitForm">
+          <div v-for="(track, index) in tracks" :key="index">
+            <h3>Track {{ index + 1 }}</h3>
+            <label for="track_title">Track Title:</label>
+            <input type="text" v-model="track.title" required>
+
+            <label for="artist_name">Artist Name(s):</label>
+            <input type="text" v-model="track.artist" required>
+
+            <label for="file_url">File URL:</label>
+            <input type="url" v-model="track.file_url" required>
+            <small>(File must be a stream and downloadable)</small>
+
+            <button type="button" @click="removeTrack(index)" v-if="index > 0">Remove Track</button>
+            <hr>
+          </div>
+          
+          <button type="button" @click="addTrack" v-if="tracks.length < 5">Add Track</button>
+
+          <label for="email">Email Address:</label>
+          <input type="email" v-model="submission.email" required>
+
+          <label for="about_artist">About Yourself (Optional):</label>
+          <textarea v-model="submission.about_artist"></textarea>
+
+          <button type="submit">Submit</button>
+        </form>
+      </div>
+    </main>
+  </section>
+</Layout>
+
+<script setup>
+import { ref } from 'vue';
+
+const tracks = ref([
+  { title: '', artist: '', file_url: '' }
+]);
+
+const submission = {
+  email: '',
+  about_artist: ''
+};
+
+const addTrack = () => {
+  if (tracks.value.length < 5) {
+    tracks.value.push({ title: '', artist: '', file_url: '' });
+  }
+};
+
+const removeTrack = (index) => {
+  tracks.value.splice(index, 1);
+};
+
+const submitForm = () => {
+  // Combine submission data with track details
+  const combinedSubmission = {
+    ...submission,
+    tracks: tracks.value
+  };
+  // TODO: Send combined submission data to server and perform validation
+};
+</script>
+
+<style>
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 1.75em;
+}
+
+.main {
+  width: fit-content;
+}
+
+h1 {
+  font-family: "IBM Plex Sans";
+  font-weight: 600;
+  font-size: 2rem;
+  width: 80%;
+}
+
+.submission-form {
+  margin-top: 2em;
+}
+
+h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1em;
+}
+
+button {
+  margin-top: 1em;
+}
+
+@media (max-width: 800px) {
+  .main {
+    width: 95%;
+  }
+
+  main iframe {
+    max-width: 100%;
+  }
+}
+</style>
