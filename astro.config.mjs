@@ -17,8 +17,6 @@ export default defineConfig({
   integrations: [mdx(), sitemap({
     filter: page => page !== "https://fancyspirits.net/impressum"
   }), robotsTxt(), compress()],
-  prefetch: {
-    defaultStrategy: "viewport"
-  },
+  prefetch: true,
   scopedStyleStrategy: "where"
 });

@@ -32,14 +32,10 @@ const releaseCollection = defineCollection({
         id: z.string(),
         name: z.string(),
         imageSrc: z.string(),
-        artists: z.string(), // TODO reference
+        artists: z.string(),
         genre: z.string(),
         // TODO string date?
-        releaseDate: z.object({
-            year: z.number(),
-            month: z.number(),
-            day: z.number(),
-        }),
+        releaseDate: z.string().date(),
         embedYt: z.string(),
         links: z.array(socialLink),
         tracks: z.array(albumTrack).optional(),
