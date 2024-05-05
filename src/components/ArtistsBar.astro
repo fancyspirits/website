@@ -1,11 +1,9 @@
 ---
+import { getCollection } from "astro:content";
 import ArtistRound from "../components/ArtistRound.astro";
-import type { ArtistDetailed } from "../Types";
 
-const artists = await Astro.glob<ArtistDetailed>("../contentData/artists/**.mdx").then(
-    artists => artists.map(artists => artists.frontmatter)
-    .filter(artist => !(artist as any).draft)
-);
+const artists = (await getCollection("artists", ({ data }) => !data.draft))
+                    .map(artist => artist.data);
 ---
 <ul>
     {artists.map(artist => <li><ArtistRound artist={artist}></ArtistRound></li>)}

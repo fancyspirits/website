@@ -1,8 +1,8 @@
 ---
-import type { ArtistDetailed } from '../Types';
+import type { CollectionEntry } from 'astro:content';
 
 export interface Props {
-	artist: ArtistDetailed;
+	artist: CollectionEntry<"artists">["data"];
 }
 
 const { artist } = Astro.props;

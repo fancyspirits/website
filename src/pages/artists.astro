@@ -1,12 +1,11 @@
 ---
+import { getCollection } from 'astro:content';
 import ArtistRoundToggle from '../components/ArtistRoundToggle.astro';
 import Layout from '../layouts/BaseLayout.astro';
-import type { ArtistDetailed } from '../Types';
 
-const artists = await Astro.glob<ArtistDetailed>("../contentData/artists/*.mdx").then(
-    artists => artists.map(artist => artist.frontmatter)
-    .filter(artist => !(artist as any).draft)
-);
+const artists = (await getCollection("artists", ({ data }) => !data.draft))
+                    .map(artist => artist.data);
+
 ---
 
 <script>
@@ -16,14 +15,15 @@ const artists = await Astro.glob<ArtistDetailed>("../contentData/artists/*.mdx")
             if (!artist) {
                 return;
             }
-            const card = artist.parentElement.parentElement;
+            const card = artist.parentElement!.parentElement!;
             card.classList.add("active");
-            card.previousElementSibling.classList.add("active");
+            card.previousElementSibling?.classList.add("active");
             (card.previousElementSibling as any).active = true;
             card.scrollIntoView({
                 behavior: "smooth",
                 block: "center"
             });
+            // @ts-ignore TODO check
             history.replaceState(null, null, " ");
         }
         const buttons = document.querySelectorAll(".artist-toggle");

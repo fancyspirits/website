@@ -1,16 +1,17 @@
 ---
+import type { CollectionEntry } from "astro:content";
 import SocialBar from "../components/SocialBar.astro";
 import Card from "./Card.astro";
-import type { ArtistDetailed, Release } from "../Types";
+import type { Release } from "../Types";
 
 export interface Props {
-    artist: ArtistDetailed,
+    artist: CollectionEntry<"artists">["data"],
 };
 
 const { artist } = Astro.props;
 const backgroundColor = artist.backgroundColor;
 
-const artistReleases = await Astro.glob<Release>("../contentData/releases/**/**.mdx").then(
+const artistReleases = await Astro.glob<Release>("../content/releases/**/**.mdx").then(
     releases => releases.map(release => release.frontmatter).filter(release => release.artists.includes(artist.name)).filter(release => !(release as any).draft)
 );
 
@@ -397,7 +398,7 @@ artistReleases.sort((release1, release2) => {
     
     document.querySelectorAll<HTMLElement>(".artist-details")
         .forEach(container => {
-            let image = container.querySelector(".artist-image-name img");
+            let image = container.querySelector(".artist-image-name img")!;
             image.addEventListener(
                 "click",
                 e => {

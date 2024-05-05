@@ -29,12 +29,3 @@ export type Release = {
     links: SocialLink[];
     tracks?: AlbumTrack[];
 };
-
-export type ArtistDetailed =  {
-    id: string;
-    name: string;
-    imageSrc: string;
-    links: SocialLink[];
-    description: string;
-    backgroundColor?: string;
-};

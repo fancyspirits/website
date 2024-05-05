@@ -1,10 +1,11 @@
 ---
+import { getCollection } from 'astro:content';
 import Card from '../components/Card.astro';
 import SocialBar from '../components/SocialBar.astro';
 import Layout from '../layouts/BaseLayout.astro';
-import type { ArtistDetailed, Release } from '../Types';
+import type { Release } from '../Types';
 
-const releases = await Astro.glob<Release>("../contentData/releases/**/*.mdx").then(
+const releases = await Astro.glob<Release>("../content/releases/**/*.mdx").then(
     releases => releases.map(release => release.frontmatter).filter(release => !(release as any).draft)
 );
 
@@ -21,9 +22,10 @@ function formatReleaseDate(release: Release) {
 
 const releaseArtistsGetter = async (release: Release) => {
     const releaseArtists = release.artists.split(",").map(artist => artist.trim());
-    return Astro.glob<ArtistDetailed>("../contentData/artists/*.mdx").then(
-        artists => artists.map(artist => artist.frontmatter).filter(artist => !(artist as any).draft).filter(artist => releaseArtists.includes(artist.name))
-    );
+    const artist = (await getCollection("artists", ({ data }) => !data.draft && releaseArtists.includes(data.name)))
+                        .map(artist => artist.data);
+
+    return artist;
 }
 
 for (const release of releases) {
@@ -461,7 +463,7 @@ for (const release of releases) {
                         <!--<p>{release.description}</p>-->
                     </div>
                     <div class="artists">
-                        {(release as any).artistObjects.map((artist: ArtistDetailed) => <a class="artist-link" href={`/artists#${artist.id}-artist`}><img class="artist-img" src={artist.imageSrc} style={artist.backgroundColor && `background-color: ${artist.backgroundColor}`}/></a>)}
+                        {(release as any).artistObjects.map((artist) => <a class="artist-link" href={`/artists#${artist.id}-artist`}><img class="artist-img" src={artist.imageSrc} style={artist.backgroundColor && `background-color: ${artist.backgroundColor}`}/></a>)}
                     </div>
                     <div class="release-date">
                         <span>Released on<br class="hide-on-mobile">&nbsp;{formatReleaseDate(release)}</span>
@@ -505,7 +507,7 @@ for (const release of releases) {
     });
 
     document.querySelectorAll<HTMLElement>(".card").forEach(card => {
-        const image = card.querySelector<HTMLElement>(".release-image img");
+        const image = card.querySelector<HTMLElement>(".release-image img")!;
         image.addEventListener(
             "click", e => {
                 image.classList.toggle("release-image-clicked");
