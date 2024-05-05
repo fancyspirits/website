@@ -1,0 +1,25 @@
+---
+import type { GetStaticPaths } from "astro";
+import { getCollection } from "astro:content";
+
+
+export const getStaticPaths = ( async () => {
+    const artists = (await getCollection("artists", ({ data }) => !data.draft))
+                        .map(artist => artist.data);
+
+    return artists.map(artist => ({
+        params: {
+            slug: artist.id
+        },
+        props: {
+            artist: artist.id
+        }
+    }));
+}) satisfies GetStaticPaths;
+
+const { artist } = Astro.props;
+---
+<script define:vars={{artist}}>
+    // Redirect to the artist page
+    window.location.href = `/artists#${artist}-artist`;
+</script>
