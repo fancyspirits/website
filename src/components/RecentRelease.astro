@@ -1,9 +1,9 @@
 ---
-import { Release } from "../Types";
+import type { CollectionEntry } from "astro:content";
 import ColoredText from "./ColoredText.astro";
 
 export interface Props {
-    release: Release;
+    release: CollectionEntry<"releases">["data"];
 };
 
 const { release } = Astro.props;
@@ -14,7 +14,7 @@ const youtubeLink = release.links.find(release => release.name.toLowerCase() ===
     <img src={release.imageSrc} alt="Album Artwork"/>
 
     <section class="inner">
-        <span class="release-name">{release.name}</span>
+        <span class="release-name"><a href={`/releases#${release.id}-release`}>{release.name}</a></span>
         <span class="artists">{release.artists}</span>
         {youtubeLink && <a href={youtubeLink.url} target="_blank" class="link"><img src="social/youtube.png"> <ColoredText class="youtube-link" textColor="#dd0000">Watch on Youtube</ColoredText></a>}
     </section>

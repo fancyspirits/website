@@ -1,0 +1,25 @@
+---
+import type { GetStaticPaths } from "astro";
+import { getCollection } from "astro:content";
+
+
+export const getStaticPaths = ( async () => {
+    const releases = (await getCollection("releases", ({ data }) => !data.draft))
+                        .map(release => release.data);
+
+    return releases.map(release => ({
+        params: {
+            slug: release.id
+        },
+        props: {
+            release: release.id
+        }
+    }));
+}) satisfies GetStaticPaths;
+
+const { release } = Astro.props;
+---
+<script define:vars={{release}}>
+    // Redirect to the release page
+    window.location.href = `/releases#${release}-release`;
+</script>
