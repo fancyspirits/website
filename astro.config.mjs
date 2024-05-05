@@ -19,5 +19,6 @@ export default defineConfig({
   }), robotsTxt(), compress()],
   prefetch: {
     defaultStrategy: "viewport"
-  }
+  },
+  scopedStyleStrategy: "where"
 });

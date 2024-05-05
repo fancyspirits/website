@@ -26,7 +26,6 @@ const artists = await Astro.glob<ArtistDetailed>("../contentData/artists/*.mdx")
             });
             history.replaceState(null, null, " ");
         }
-        let previousArtist: HTMLElement | undefined;
         const buttons = document.querySelectorAll(".artist-toggle");
         buttons.forEach((button: any, index) => button.addEventListener("click", function (ev) {
             const onPhone = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0) <= 800;
