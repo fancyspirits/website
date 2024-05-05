@@ -11,13 +11,8 @@ const { artist } = Astro.props;
 const backgroundColor = artist.backgroundColor;
 
 const artistReleases = (await getCollection("releases", ({ data }) => !data.draft && data.artists.includes(artist.name)))
-					.map(({ data }) => data);
-
-artistReleases.sort((release1, release2) => {
-    const date1 = new Date(release1.releaseDate.year, release1.releaseDate.month, release1.releaseDate.day);
-    const date2 = new Date(release2.releaseDate.year, release2.releaseDate.month, release2.releaseDate.day);
-    return date2.getTime() - date1.getTime();
-});
+					.map(({ data }) => data)
+                    .sort((a, b) => a.releaseDate < b.releaseDate ? 1 : -1);
 
 ---
 
