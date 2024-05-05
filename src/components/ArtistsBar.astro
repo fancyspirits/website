@@ -1,6 +1,6 @@
 ---
 import ArtistRound from "../components/ArtistRound.astro";
-import { ArtistDetailed } from "../Types";
+import type { ArtistDetailed } from "../Types";
 
 const artists = await Astro.glob<ArtistDetailed>("../contentData/artists/**.mdx").then(
     artists => artists.map(artists => artists.frontmatter)

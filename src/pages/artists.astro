@@ -1,7 +1,7 @@
 ---
 import ArtistRoundToggle from '../components/ArtistRoundToggle.astro';
 import Layout from '../layouts/BaseLayout.astro';
-import { ArtistDetailed } from '../Types';
+import type { ArtistDetailed } from '../Types';
 
 const artists = await Astro.glob<ArtistDetailed>("../contentData/artists/*.mdx").then(
     artists => artists.map(artist => artist.frontmatter)

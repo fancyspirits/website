@@ -1,8 +1,7 @@
 ---
 import SocialBar from "../components/SocialBar.astro";
 import Card from "./Card.astro";
-import { ArtistDetailed, Release } from "../Types";
-import { AstroComponentFactory } from "astro/dist/runtime/server";
+import type { ArtistDetailed, Release } from "../Types";
 
 export interface Props {
     artist: ArtistDetailed,

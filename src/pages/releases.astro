@@ -2,7 +2,7 @@
 import Card from '../components/Card.astro';
 import SocialBar from '../components/SocialBar.astro';
 import Layout from '../layouts/BaseLayout.astro';
-import { ArtistDetailed, Release } from '../Types';
+import type { ArtistDetailed, Release } from '../Types';
 
 const releases = await Astro.glob<Release>("../contentData/releases/**/*.mdx").then(
     releases => releases.map(release => release.frontmatter).filter(release => !(release as any).draft)
