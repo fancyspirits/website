@@ -1,21 +1,15 @@
 ---
+import { getCollection } from 'astro:content';
 import Card from '../components/Card.astro';
 import Layout from '../layouts/BaseLayout.astro';
-import AboutLabel from '../contentData/about-label.mdx'
+import AboutLabel from '../content/other/about-label.mdx'
 import RecentReleaseLayout from '../components/RecentRelease.astro';
-import LabelLinks from '../contentData/label-links.mdx';
+import LabelLinks from '../content/other/label-links.mdx';
 import ArtistsBar from '../components/ArtistsBar.astro';
-import { Release } from '../Types';
 
-const releases = await Astro.glob<Release>("../contentData/releases/**/*.mdx").then(
-	releases => releases.map(release => release.frontmatter).filter(release => !(release as any).draft)
-);
-
-releases.sort((release1, release2) => {
-    const date1 = new Date(release1.releaseDate.year, release1.releaseDate.month, release1.releaseDate.day);
-    const date2 = new Date(release2.releaseDate.year, release2.releaseDate.month, release2.releaseDate.day);
-    return date2.getTime() - date1.getTime();
-});
+const releases = (await getCollection("releases", ({ data }) => !data.draft))
+					.map(({ data }) => data)
+					.sort((a, b) => a.releaseDate < b.releaseDate ? 1 : -1);
 
 const recentReleases = releases.slice(0, 3);
 ---

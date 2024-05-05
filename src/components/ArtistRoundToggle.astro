@@ -1,25 +1,18 @@
 ---
+import { getCollection, type CollectionEntry } from "astro:content";
 import SocialBar from "../components/SocialBar.astro";
 import Card from "./Card.astro";
-import { ArtistDetailed, Release } from "../Types";
-import { AstroComponentFactory } from "astro/dist/runtime/server";
 
 export interface Props {
-    artist: ArtistDetailed,
+    artist: CollectionEntry<"artists">["data"],
 };
 
 const { artist } = Astro.props;
 const backgroundColor = artist.backgroundColor;
 
-const artistReleases = await Astro.glob<Release>("../contentData/releases/**/**.mdx").then(
-    releases => releases.map(release => release.frontmatter).filter(release => release.artists.includes(artist.name)).filter(release => !(release as any).draft)
-);
-
-artistReleases.sort((release1, release2) => {
-    const date1 = new Date(release1.releaseDate.year, release1.releaseDate.month, release1.releaseDate.day);
-    const date2 = new Date(release2.releaseDate.year, release2.releaseDate.month, release2.releaseDate.day);
-    return date2.getTime() - date1.getTime();
-});
+const artistReleases = (await getCollection("releases", ({ data }) => !data.draft && data.artists.includes(artist.name)))
+					.map(({ data }) => data)
+                    .sort((a, b) => a.releaseDate < b.releaseDate ? 1 : -1);
 
 ---
 
@@ -398,7 +391,7 @@ artistReleases.sort((release1, release2) => {
     
     document.querySelectorAll<HTMLElement>(".artist-details")
         .forEach(container => {
-            let image = container.querySelector(".artist-image-name img");
+            let image = container.querySelector(".artist-image-name img")!;
             image.addEventListener(
                 "click",
                 e => {

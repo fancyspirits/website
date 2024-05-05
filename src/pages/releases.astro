@@ -1,34 +1,28 @@
 ---
+import { getCollection } from 'astro:content';
 import Card from '../components/Card.astro';
 import SocialBar from '../components/SocialBar.astro';
 import Layout from '../layouts/BaseLayout.astro';
-import { ArtistDetailed, Release } from '../Types';
+import type { CollectionEntry } from 'astro:content';
 
-const releases = await Astro.glob<Release>("../contentData/releases/**/*.mdx").then(
-    releases => releases.map(release => release.frontmatter).filter(release => !(release as any).draft)
-);
+const releases = (await getCollection("releases", ({ data }) => !data.draft))
+					.map(({ data }) => data)
+                    .sort((a, b) => a.releaseDate < b.releaseDate ? 1 : -1);
 
-releases.sort((release1, release2) => {
-    const date1 = new Date(release1.releaseDate.year, release1.releaseDate.month - 1, release1.releaseDate.day);
-    const date2 = new Date(release2.releaseDate.year, release2.releaseDate.month - 1, release2.releaseDate.day);
-    return date2.getTime() - date1.getTime();
-});
-
-function formatReleaseDate(release: Release) {
-    const date = new Date(release.releaseDate.year, release.releaseDate.month - 1, release.releaseDate.day);
+function formatReleaseDate(release: CollectionEntry<"releases">["data"]) {
+    const date = new Date(release.releaseDate);
     return date.toLocaleDateString();
 }
 
-const releaseArtistsGetter = async (release: Release) => {
+const getArtistsOfRelease = async (release) => {
     const releaseArtists = release.artists.split(",").map(artist => artist.trim());
-    return Astro.glob<ArtistDetailed>("../contentData/artists/*.mdx").then(
-        artists => artists.map(artist => artist.frontmatter).filter(artist => !(artist as any).draft).filter(artist => releaseArtists.includes(artist.name))
-    );
+    const artists = (await getCollection("artists", ({ data }) => !data.draft && releaseArtists.includes(data.name)))
+                        .map(artist => artist.data);
+
+    return artists;
 }
 
-for (const release of releases) {
-    (release as any).artistObjects = await releaseArtistsGetter(release);
-}
+const artistsOfReleases = Object.fromEntries(await Promise.all(releases.map(async release => [release.id, await getArtistsOfRelease(release)])));
 
 ---
 <style>
@@ -457,11 +451,11 @@ for (const release of releases) {
                         
                     </div>
                     <div class="release-video">
-                        <iframe loading="lazy" src={release.embedYt} title={`${release.name} – Youtube`} allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" allowfullscreen></iframe>
+                        <iframe data-astro-prefetch="false" loading="lazy" src={release.embedYt} title={`${release.name} – Youtube`} allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" allowfullscreen></iframe>
                         <!--<p>{release.description}</p>-->
                     </div>
                     <div class="artists">
-                        {(release as any).artistObjects.map((artist: ArtistDetailed) => <a class="artist-link" href={`/artists#${artist.id}-artist`}><img class="artist-img" src={artist.imageSrc} style={artist.backgroundColor && `background-color: ${artist.backgroundColor}`}/></a>)}
+                        {artistsOfReleases[release.id].map((artist) => <a class="artist-link" href={`/artists#${artist.id}-artist`}><img class="artist-img" src={artist.imageSrc} style={artist.backgroundColor && `background-color: ${artist.backgroundColor}`}/></a>)}
                     </div>
                     <div class="release-date">
                         <span>Released on<br class="hide-on-mobile">&nbsp;{formatReleaseDate(release)}</span>
@@ -505,7 +499,7 @@ for (const release of releases) {
     });
 
     document.querySelectorAll<HTMLElement>(".card").forEach(card => {
-        const image = card.querySelector<HTMLElement>(".release-image img");
+        const image = card.querySelector<HTMLElement>(".release-image img")!;
         image.addEventListener(
             "click", e => {
                 image.classList.toggle("release-image-clicked");
