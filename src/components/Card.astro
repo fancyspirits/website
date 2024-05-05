@@ -21,12 +21,12 @@ const { title, class: className, overflow = false } = Astro.props;
         grid-template-rows: min-content 1fr;
     }
 
-    section:hover {
+    /* section:hover {
         box-shadow: -15px -15px 22px rgba(255,255,255,0.5),
             15 15px 22px rgba(70,70,70,0.12),
             -2px -2px 6px rgba(0,0,0,0.1);
         transform: scale(100.125%, 100.125%);
-    }
+    } */
 
     article {
         align-self: center;
@@ -54,11 +54,11 @@ const { title, class: className, overflow = false } = Astro.props;
                 -1px -1px 4px rgba(0,0,0,0.1);
         }
 
-        section:hover {
+        /* section:hover {
             box-shadow: -20px -20px 30px rgba(0,0,0,0.5),
             20px 20px 30px rgba(70,70,70,0.12),
             -2px -2px 8px rgba(0,0,0,0.1);
-        }
+        } */
     }
 </style>
 <section class={className}> 

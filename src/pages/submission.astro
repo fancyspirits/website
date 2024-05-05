@@ -18,7 +18,7 @@ We value innovation, originality, and skill, and we welcome submissions from art
             <form @submit.prevent="submitForm">
                 <div v-for="(track, index) in tracks" :key="index">
                 <!-- <h3>Track { index + 1 }: </h3> -->
-                <h3>Track index: </h3>
+                <h3>Track <!-- {index.ToString()} --> 0: </h3>
                 <label for="track_title">Track Title:</label>
                 <input type="text" v-model="track.title" required class="input-field">
     
