@@ -53,6 +53,48 @@ We value innovation, originality, and skill, and we welcome submissions from art
   </Layout>
   
 <style>
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 1.75em;
+}
+
+.main {
+  width: fit-content;
+}
+
+h1 {
+  font-family: "IBM Plex Sans";
+  font-weight: 600;
+  font-size: 2rem;
+  width: 80%;
+}
+
+.submission-form {
+  margin-top: 2em;
+}
+
+h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1em;
+}
+
+button {
+  margin-top: 1em;
+}
+
+@media (max-width: 800px) {
+  .main {
+    width: 95%;
+  }
+
+  main iframe {
+    max-width: 100%;
+  }
+}
+
+
     .input-field, .text-area {
     width: 100%;
     padding: 0.5em;
@@ -101,78 +143,41 @@ We value innovation, originality, and skill, and we welcome submissions from art
 </style>
 
 <script>
-import { ref } from 'vue';
+  const trackContainer = document.getElementById('trackContainer');
+  const addTrackButton = document.getElementById('addTrackButton');
+  let trackIndex = 1;
 
-let index = 0;
+  addTrackButton.addEventListener('click', () => {
+      if (trackIndex < 5) {
+          const trackDiv = document.createElement('div');
+          trackDiv.classList.add('track');
+          trackDiv.id = `track${trackIndex}`;
+          trackDiv.innerHTML = `
+              <h3>Track ${trackIndex + 1}: </h3>
+              <label for="track_title">Track Title:</label>
+              <input type="text" name="track_title" required class="input-field">
 
-const tracks = ref([
-  { title: '', artist: '', file_url: '' }
-]);
+              <label for="artist_name">Artist Name(s):</label>
+              <input type="text" name="artist_name" required class="input-field">
 
-const submission = {
-  email: '',
-  about_artist: ''
-};
+              <label for="file_url">File URL:</label>
+              <input type="url" name="file_url" required class="input-field">
+              <small>(File must be stream and downloadable)</small>
+              <hr>
+          `;
+          trackContainer.appendChild(trackDiv);
+          trackIndex++;
+      }
+  });
 
-const addTrack = () => {
-  if (tracks.value.length < 5) {
-    tracks.value.push({ title: '', artist: '', file_url: '' });
-  }
-};
-
-const removeTrack = (index) => {
-  tracks.value.splice(index, 1);
-};
-
-const submitForm = () => {
-  // Combine submission data with track details
-  const combinedSubmission = {
-    ...submission,
-    tracks: tracks.value
-  };
-  // TODO: Send combined submission data to server and perform validation
-};
+  const submissionForm = document.getElementById('submissionForm');
+  submissionForm.addEventListener('submit', (event) => {
+      event.preventDefault();
+      // Collect form data and submit
+      const formData = new FormData(submissionForm);
+      // You can now use the formData to submit the form data
+      console.log(formData);
+  });
 </script>
 
-<style>
-.wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding-top: 1.75em;
-}
 
-.main {
-  width: fit-content;
-}
-
-h1 {
-  font-family: "IBM Plex Sans";
-  font-weight: 600;
-  font-size: 2rem;
-  width: 80%;
-}
-
-.submission-form {
-  margin-top: 2em;
-}
-
-h2 {
-  font-size: 1.5rem;
-  margin-bottom: 1em;
-}
-
-button {
-  margin-top: 1em;
-}
-
-@media (max-width: 800px) {
-  .main {
-    width: 95%;
-  }
-
-  main iframe {
-    max-width: 100%;
-  }
-}
-</style>
