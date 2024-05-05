@@ -17,13 +17,12 @@ const artistReleases = (await getCollection("releases", ({ data }) => !data.draf
 ---
 
 
-<style define:vars={{backgroundColor}}>
+<style define:vars={{backgroundColor, artist}}>
 
     .withBackground {
         background-color: var(--backgroundColor);
     }
     .artist-toggle img {
-        background-image: url({artist.imageSrc});
         max-width: 5em;
         max-height: 5em;
         aspect-ratio: 1;
