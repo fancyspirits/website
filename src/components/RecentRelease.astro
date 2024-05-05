@@ -1,9 +1,9 @@
 ---
-import type { Release } from "../Types";
+import type { CollectionEntry } from "astro:content";
 import ColoredText from "./ColoredText.astro";
 
 export interface Props {
-    release: Release;
+    release: CollectionEntry<"releases">["data"];
 };
 
 const { release } = Astro.props;

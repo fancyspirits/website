@@ -1,5 +1,5 @@
 export class ClassWatcher {
-    observer: MutationObserver;
+    observer: MutationObserver | null;
     lastClassState: boolean;
 
     constructor(private targetNode: HTMLElement, private classToWatch: string, private onRemove: () => void) {
@@ -15,11 +15,11 @@ export class ClassWatcher {
     }
 
     observe() {
-        this.observer.observe(this.targetNode, { attributes: true });
+        this.observer?.observe(this.targetNode, { attributes: true });
     }
 
     disconnect() {
-        this.observer.disconnect();
+        this.observer?.disconnect();
     }
 
     mutationCallback(mutationsList: MutationRecord[]) {

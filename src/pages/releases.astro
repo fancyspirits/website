@@ -3,11 +3,9 @@ import { getCollection } from 'astro:content';
 import Card from '../components/Card.astro';
 import SocialBar from '../components/SocialBar.astro';
 import Layout from '../layouts/BaseLayout.astro';
-import type { Release } from '../Types';
 
-const releases = await Astro.glob<Release>("../content/releases/**/*.mdx").then(
-    releases => releases.map(release => release.frontmatter).filter(release => !(release as any).draft)
-);
+const releases = (await getCollection("releases", ({ data }) => !data.draft))
+					.map(({ data }) => data);
 
 releases.sort((release1, release2) => {
     const date1 = new Date(release1.releaseDate.year, release1.releaseDate.month - 1, release1.releaseDate.day);
@@ -15,12 +13,12 @@ releases.sort((release1, release2) => {
     return date2.getTime() - date1.getTime();
 });
 
-function formatReleaseDate(release: Release) {
+function formatReleaseDate(release) {
     const date = new Date(release.releaseDate.year, release.releaseDate.month - 1, release.releaseDate.day);
     return date.toLocaleDateString();
 }
 
-const releaseArtistsGetter = async (release: Release) => {
+const releaseArtistsGetter = async (release) => {
     const releaseArtists = release.artists.split(",").map(artist => artist.trim());
     const artist = (await getCollection("artists", ({ data }) => !data.draft && releaseArtists.includes(data.name)))
                         .map(artist => artist.data);

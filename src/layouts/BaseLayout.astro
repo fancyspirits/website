@@ -2,9 +2,7 @@
 import { getCollection } from 'astro:content';
 import Footer from '../components/Footer.astro';
 import NavBar from '../components/NavBar.astro';
-// import "@fontsource/ibm-plex-sans";
 import "../styles/Base.css";
-import type { Release } from '../Types';
 
 export interface Props {
 	title: string;
@@ -17,10 +15,8 @@ const { title, route, noindex = false } = Astro.props;
 const artists = await getCollection("artists");
 const artistNames = artists.map(artist => artist.data.name).join(",");
 
-const releaseNames = await Astro.glob<Release>("../content/releases/**/*.mdx").then(
-	releases => releases.map(release => release.frontmatter)
-		.map(release => release.name).join(",")
-);
+const releases = await getCollection("releases");
+const releaseNames = releases.map(release => release.data.name).join(",");
 ---
 
 <!DOCTYPE html>

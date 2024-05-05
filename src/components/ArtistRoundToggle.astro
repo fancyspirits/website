@@ -1,8 +1,7 @@
 ---
-import type { CollectionEntry } from "astro:content";
+import { getCollection, type CollectionEntry } from "astro:content";
 import SocialBar from "../components/SocialBar.astro";
 import Card from "./Card.astro";
-import type { Release } from "../Types";
 
 export interface Props {
     artist: CollectionEntry<"artists">["data"],
@@ -11,9 +10,8 @@ export interface Props {
 const { artist } = Astro.props;
 const backgroundColor = artist.backgroundColor;
 
-const artistReleases = await Astro.glob<Release>("../content/releases/**/**.mdx").then(
-    releases => releases.map(release => release.frontmatter).filter(release => release.artists.includes(artist.name)).filter(release => !(release as any).draft)
-);
+const artistReleases = (await getCollection("releases", ({ data }) => !data.draft && data.artists.includes(artist.name)))
+					.map(({ data }) => data);
 
 artistReleases.sort((release1, release2) => {
     const date1 = new Date(release1.releaseDate.year, release1.releaseDate.month, release1.releaseDate.day);
