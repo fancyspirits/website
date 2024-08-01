@@ -457,6 +457,13 @@ declare module 'astro:content' {
   collection: "releases";
   data: InferEntrySchema<"releases">
 } & { render(): Render[".mdx"] };
+"2024/sahara-sunrise.mdx": {
+	id: "2024/sahara-sunrise.mdx";
+  slug: "2024/sahara-sunrise";
+  body: string;
+  collection: "releases";
+  data: InferEntrySchema<"releases">
+} & { render(): Render[".mdx"] };
 "2024/seraphim_files.mdx": {
 	id: "2024/seraphim_files.mdx";
   slug: "2024/seraphim_files";
