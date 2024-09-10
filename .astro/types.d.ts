@@ -450,6 +450,13 @@ declare module 'astro:content' {
   collection: "releases";
   data: InferEntrySchema<"releases">
 } & { render(): Render[".mdx"] };
+"2024/move-on.mdx": {
+	id: "2024/move-on.mdx";
+  slug: "2024/move-on";
+  body: string;
+  collection: "releases";
+  data: InferEntrySchema<"releases">
+} & { render(): Render[".mdx"] };
 "2024/ringmoth.mdx": {
 	id: "2024/ringmoth.mdx";
   slug: "2024/ringmoth";
