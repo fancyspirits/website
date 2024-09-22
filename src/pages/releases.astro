@@ -18,8 +18,7 @@ const getArtistsOfRelease = async (release) => {
     const releaseArtists = release.artists.split(",").map(artist => artist.trim());
     const artists = (await getCollection("artists", ({ data }) => !data.draft && releaseArtists.includes(data.name)))
                         .map(artist => artist.data);
-
-    return artists;
+    return releaseArtists.map(artistName => artists.find(artist => artist.name === artistName)).filter(artist => artist);
 }
 
 const artistsOfReleases = Object.fromEntries(await Promise.all(releases.map(async release => [release.id, await getArtistsOfRelease(release)])));
@@ -465,6 +464,7 @@ const artistsOfReleases = Object.fromEntries(await Promise.all(releases.map(asyn
                             <div class="release-track-info">
                                 <p class="release-track-name">{track.name}</p>
                                 {track.feat && <span class="release-track-feat">feat. {track.feat}</span>}
+                                {track.by && <span class="release-track-feat">{track.by}</span>}
                             </div>
                             <div class="release-track-links">
                                 <SocialBar 

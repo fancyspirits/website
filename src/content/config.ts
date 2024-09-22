@@ -9,6 +9,7 @@ const socialLink = z.object({
 const albumTrack = z.object({
     name: z.string(),
     feat: z.string().optional(),
+    by: z.string().optional(),
     links: z.array(socialLink),
 });
 
