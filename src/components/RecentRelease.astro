@@ -11,19 +11,20 @@ const youtubeLink = release.links.find(release => release.name.toLowerCase() ===
 
 ---
 <section class="outer">
-    <img src={release.imageSrc} alt="Album Artwork"/>
+    <a class="cover-img" href={`/releases#${release.id}-release`}>
+        <img src={release.imageSrc} alt="Album Artwork"/>
+    </a>
 
     <section class="inner">
         <span class="release-name"><a href={`/releases#${release.id}-release`}>{release.name}</a></span>
-        <span class="artists">{release.artists}</span>
+        <span class="artists"><a href={`/releases#${release.id}-release`}>{release.artists}</a></span>
         {youtubeLink && <a href={youtubeLink.url} target="_blank" class="link"><img src="social/youtube.png"> <ColoredText class="youtube-link" textColor="#dd0000">Watch on Youtube</ColoredText></a>}
     </section>
 </section>
 <style>
     .outer {
         display: flex;
-        /* margin: 2rem 1rem; */
-
+        // margin: 2rem 1rem;
     }
 
     section > img {
@@ -33,6 +34,25 @@ const youtubeLink = release.links.find(release => release.name.toLowerCase() ===
         align-self: center;
         margin-right: 1.5em;
     }
+    
+    .cover-img {
+        display: inline-block;
+        width: clamp(2.5em, 40%, 5em);
+        aspect-ratio: 1;
+        background-color: transparent;
+        align-self: center;
+        margin-right: 1.5em;
+        overflow: hidden;
+        transition: transform 0.5s ease;
+    }
+
+    .cover-img img {
+        display: block;
+        width: 100%;
+        height: auto;
+    }
+
+
 
     .inner > span, .inner > a {
         display: block;
@@ -74,6 +94,10 @@ const youtubeLink = release.links.find(release => release.name.toLowerCase() ===
     a:hover > img {
         filter: saturate(110%);
         transform: translateY(-0.15em);
+    }
+
+    .cover-img:hover  {
+        transform: scale(105%);
     }
 
     @media (prefers-color-scheme: dark) {

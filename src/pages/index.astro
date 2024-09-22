@@ -13,6 +13,54 @@ const releases = (await getCollection("releases", ({ data }) => !data.draft))
 
 const recentReleases = releases.slice(0, 3);
 ---
+
+<body>
+	<div><br></div>
+
+	<Layout title="Fancy Spirits">
+		<section class="wrapper">
+			<main class="main">
+				<br>
+				<Card class="about" title="About our Label" overflow={true}>
+					<!-- I think one logo is enough 😅 -->
+					<!-- <div class="img-wrap">
+						<img class="label-logo" src="/logos/Logo Squared.svg" />
+					</div> -->
+					<div class="about-label">
+						<AboutLabel />
+						<br>
+						<strong class="demo-caption">You want to join us on our journey and be part of the Fancy Spirits Community?</strong>
+						<div class="demo-btn-wrapper">
+							<a href="/demo" class="demo-btn">
+								Submit a Demo
+							</a>
+						</div>
+					</div>
+					<div class="label-logo-full">
+						<img src="/logos/Logo Full.png">
+					</div>
+				</Card>
+				<Card class="new-releases" title="Recent Releases">
+					<div class="new-releases-wrap">
+						{recentReleases.map(release => 
+						<RecentReleaseLayout release={release} />
+						)}
+					</div>
+				</Card>
+				<Card class="links" title="Links">
+					<div class="links-wrap">
+						<LabelLinks />
+					</div>
+				</Card>
+				<section class="artists-bar">
+					<ArtistsBar></ArtistsBar>
+				</section>
+			</main>
+		</section>
+	</Layout>
+</body>
+
+
 <style>
 	.wrapper {
 		display: flex;
@@ -34,12 +82,7 @@ const recentReleases = releases.slice(0, 3);
 		width: 85%;
 	}
 
-	h1 {
-        font-family: "IBM Plex Sans";
-        font-weight: 600;
-        font-size: 2rem;
-		width: 80%;
-    }
+
 
 	.about {
 		grid-area: about;
@@ -114,10 +157,11 @@ const recentReleases = releases.slice(0, 3);
 		margin-left: auto;
 		max-height: 10em;
 		object-fit: cover;
-		margin-top: -2em;
+		margin-top: -2em; /* TODO: replace with different grafic - this one here has issues because it draws top lines  */
 		float: right;
 		margin-left: 1.5em;
 		margin-bottom: 1.5em;
+        padding: 10px; 
 	}
 
 	.label-logo-full {
@@ -218,43 +262,3 @@ const recentReleases = releases.slice(0, 3);
 		}
 	}
 </style>
-<Layout title="Fancy Spirits">
-	<section class="wrapper">
-		<h1>Fancy Spirits</h1>
-		<main class="main">
-			<Card class="about" title="About our Label" overflow={true}>
-				<div class="img-wrap">
-					<img class="label-logo" src="/logos/Logo Squared.svg" />
-				</div>
-				<div class="about-label">
-					<AboutLabel />
-					<br>
-					<strong class="demo-caption">You want to join us on our journey and be part of the Fancy Spirits Community?</strong>
-					<div class="demo-btn-wrapper">
-						<a href="/demo" class="demo-btn">
-							Submit a Demo
-						</a>
-					</div>
-				</div>
-				<div class="label-logo-full">
-					<img src="/logos/Logo Full.png">
-				</div>
-			</Card>
-			<Card class="new-releases" title="Recent Releases">
-				<div class="new-releases-wrap">
-					{recentReleases.map(release => 
-					<RecentReleaseLayout release={release} />
-					)}
-				</div>
-			</Card>
-			<Card class="links" title="Links">
-				<div class="links-wrap">
-					<LabelLinks />
-				</div>
-			</Card>
-			<section class="artists-bar">
-				<ArtistsBar></ArtistsBar>
-			</section>
-		</main>
-	</section>
-</Layout>
