@@ -80,6 +80,7 @@ const artists = (await getCollection("artists", ({ data }) => !data.draft))
     .wrapper {
         display: flex;
         justify-content: center;
+        min-height: 100vh;
     }
 
     h1 {
