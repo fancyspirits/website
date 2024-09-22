@@ -34,6 +34,8 @@
     font-weight: 700;
 } */
 
+
+
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+JP:wght@100;200;300;400;500;600;700&family=IBM+Plex+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap');
 
 * {
@@ -43,6 +45,20 @@
     font-family: "IBM Plex Sans";
     line-height: 150%;
 }
+
+@font-face {
+    font-family: 'LEMONMILK-Medium';
+    src: url('/fonts/LEMONMILK-Medium.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: 'LEMONMILK-Light';
+    src: url('/fonts/LEMONMILK-Light.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+  }
 
 main {
     padding: 2rem;
@@ -61,6 +77,21 @@ body, html{
     margin: 0; 
 }
 
+
+h1 {
+    font-family: "LEMONMILK-Medium";
+    font-weight: 600;
+    font-size: 2rem;
+}
+
+
+h3 {
+    font-family: "LEMONMILK-Light";
+    font-weight: 600;
+    font-size: 1.5rem;
+    margin-bottom: 0.75em;
+}
+
 body {
     background-color: #f7f7f7;
     display: flex;
@@ -72,6 +103,10 @@ ul, li {
     list-style: none;
 }
 
+p {
+    font-size: 1.1rem;
+}
+
 a {
     text-decoration: none;
     color: inherit;
@@ -79,7 +114,7 @@ a {
 
 footer {
     padding: 20px;
-    
+
 }
 
 @media (prefers-color-scheme: dark) {

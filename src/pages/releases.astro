@@ -36,12 +36,6 @@ const artistsOfReleases = Object.fromEntries(await Promise.all(releases.map(asyn
         justify-content: center;
     }
 
-    h1 {
-        font-family: "IBM Plex Sans";
-        font-weight: 600;
-        font-size: 2rem;
-        margin-bottom: 1em;
-    }
 
     .card-wrapper {
         display: grid;
@@ -436,7 +430,7 @@ const artistsOfReleases = Object.fromEntries(await Promise.all(releases.map(asyn
 <Layout title="Fancy Spirits: Releases" route="releases">
     <div class="wrapper">
         <main>
-            <h1>Releases</h1>
+            <h1><br></h1>
             {releases.map(release => 
             <Card class="card">
                 <span class="anchor" id={`${release.id}-release`}></span>

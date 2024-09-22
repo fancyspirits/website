@@ -61,7 +61,7 @@ const artists = (await getCollection("artists", ({ data }) => !data.draft))
 <Layout title="Fancy Spirits: Artists" route="artists">
     <div class="wrapper">
         <main>
-            <h1>Our Artists</h1>
+            <h1><br></h1>
             <section>
                 {artists.map(artist => {
                     return <ArtistRoundToggle artist={artist}></ArtistRoundToggle>;
@@ -83,11 +83,6 @@ const artists = (await getCollection("artists", ({ data }) => !data.draft))
         min-height: 100vh;
     }
 
-    h1 {
-        font-family: "IBM Plex Sans";
-        font-weight: 600;
-        font-size: 2rem;
-    }
 
     section {
         display: grid;
