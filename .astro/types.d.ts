@@ -141,91 +141,91 @@ declare module 'astro:content' {
   slug: "4z";
   body: string;
   collection: "artists";
-  data: any
+  data: InferEntrySchema<"artists">
 } & { render(): Render[".mdx"] };
 "doxbleK.mdx": {
 	id: "doxbleK.mdx";
   slug: "doxblek";
   body: string;
   collection: "artists";
-  data: any
+  data: InferEntrySchema<"artists">
 } & { render(): Render[".mdx"] };
 "exahertz.mdx": {
 	id: "exahertz.mdx";
   slug: "exahertz";
   body: string;
   collection: "artists";
-  data: any
+  data: InferEntrySchema<"artists">
 } & { render(): Render[".mdx"] };
 "invaers.mdx": {
 	id: "invaers.mdx";
   slug: "invaers";
   body: string;
   collection: "artists";
-  data: any
+  data: InferEntrySchema<"artists">
 } & { render(): Render[".mdx"] };
 "jiku.mdx": {
 	id: "jiku.mdx";
   slug: "jiku";
   body: string;
   collection: "artists";
-  data: any
+  data: InferEntrySchema<"artists">
 } & { render(): Render[".mdx"] };
 "jon-kat.mdx": {
 	id: "jon-kat.mdx";
   slug: "jon-kat";
   body: string;
   collection: "artists";
-  data: any
+  data: InferEntrySchema<"artists">
 } & { render(): Render[".mdx"] };
 "leWel.mdx": {
 	id: "leWel.mdx";
   slug: "lewel";
   body: string;
   collection: "artists";
-  data: any
+  data: InferEntrySchema<"artists">
 } & { render(): Render[".mdx"] };
 "lunanescence.mdx": {
 	id: "lunanescence.mdx";
   slug: "lunanescence";
   body: string;
   collection: "artists";
-  data: any
+  data: InferEntrySchema<"artists">
 } & { render(): Render[".mdx"] };
 "lyyz.mdx": {
 	id: "lyyz.mdx";
   slug: "lyyz";
   body: string;
   collection: "artists";
-  data: any
+  data: InferEntrySchema<"artists">
 } & { render(): Render[".mdx"] };
 "meridian.mdx": {
 	id: "meridian.mdx";
   slug: "meridian";
   body: string;
   collection: "artists";
-  data: any
+  data: InferEntrySchema<"artists">
 } & { render(): Render[".mdx"] };
 "sven-kleer.mdx": {
 	id: "sven-kleer.mdx";
   slug: "sven-kleer";
   body: string;
   collection: "artists";
-  data: any
+  data: InferEntrySchema<"artists">
 } & { render(): Render[".mdx"] };
 "troteos.mdx": {
 	id: "troteos.mdx";
   slug: "troteos";
   body: string;
   collection: "artists";
-  data: any
+  data: InferEntrySchema<"artists">
 } & { render(): Render[".mdx"] };
 "ucalyptus.mdx": {
 	id: "ucalyptus.mdx";
   slug: "ucalyptus";
   body: string;
   collection: "artists";
-  data: any
+  data: InferEntrySchema<"artists">
 } & { render(): Render[".mdx"] };
 };
 "drafts": {
@@ -273,217 +273,224 @@ declare module 'astro:content' {
   slug: "2021/ale";
   body: string;
   collection: "releases";
-  data: any
+  data: InferEntrySchema<"releases">
 } & { render(): Render[".mdx"] };
 "2021/friendly-fire.mdx": {
 	id: "2021/friendly-fire.mdx";
   slug: "2021/friendly-fire";
   body: string;
   collection: "releases";
-  data: any
+  data: InferEntrySchema<"releases">
 } & { render(): Render[".mdx"] };
 "2021/journey-through-time-and-space.mdx": {
 	id: "2021/journey-through-time-and-space.mdx";
   slug: "2021/journey-through-time-and-space";
   body: string;
   collection: "releases";
-  data: any
+  data: InferEntrySchema<"releases">
 } & { render(): Render[".mdx"] };
 "2021/liftoff.mdx": {
 	id: "2021/liftoff.mdx";
   slug: "2021/liftoff";
   body: string;
   collection: "releases";
-  data: any
+  data: InferEntrySchema<"releases">
 } & { render(): Render[".mdx"] };
 "2021/lost-signal-jon-kat.mdx": {
 	id: "2021/lost-signal-jon-kat.mdx";
   slug: "2021/lost-signal-jon-kat";
   body: string;
   collection: "releases";
-  data: any
+  data: InferEntrySchema<"releases">
 } & { render(): Render[".mdx"] };
 "2021/nova-phantasm.mdx": {
 	id: "2021/nova-phantasm.mdx";
   slug: "2021/nova-phantasm";
   body: string;
   collection: "releases";
-  data: any
+  data: InferEntrySchema<"releases">
 } & { render(): Render[".mdx"] };
 "2021/paranoia-delusion.mdx": {
 	id: "2021/paranoia-delusion.mdx";
   slug: "2021/paranoia-delusion";
   body: string;
   collection: "releases";
-  data: any
+  data: InferEntrySchema<"releases">
 } & { render(): Render[".mdx"] };
 "2021/timekeeper.mdx": {
 	id: "2021/timekeeper.mdx";
   slug: "2021/timekeeper";
   body: string;
   collection: "releases";
-  data: any
+  data: InferEntrySchema<"releases">
 } & { render(): Render[".mdx"] };
 "2021/vacation-in-space.mdx": {
 	id: "2021/vacation-in-space.mdx";
   slug: "2021/vacation-in-space";
   body: string;
   collection: "releases";
-  data: any
+  data: InferEntrySchema<"releases">
 } & { render(): Render[".mdx"] };
 "2022/astral-realm.mdx": {
 	id: "2022/astral-realm.mdx";
   slug: "2022/astral-realm";
   body: string;
   collection: "releases";
-  data: any
+  data: InferEntrySchema<"releases">
 } & { render(): Render[".mdx"] };
 "2022/lost-signal-doxblek.mdx": {
 	id: "2022/lost-signal-doxblek.mdx";
   slug: "2022/lost-signal-doxblek";
   body: string;
   collection: "releases";
-  data: any
+  data: InferEntrySchema<"releases">
 } & { render(): Render[".mdx"] };
 "2023/bushfire.mdx": {
 	id: "2023/bushfire.mdx";
   slug: "2023/bushfire";
   body: string;
   collection: "releases";
-  data: any
+  data: InferEntrySchema<"releases">
 } & { render(): Render[".mdx"] };
 "2023/even-jon-kat.mdx": {
 	id: "2023/even-jon-kat.mdx";
   slug: "2023/even-jon-kat";
   body: string;
   collection: "releases";
-  data: any
+  data: InferEntrySchema<"releases">
 } & { render(): Render[".mdx"] };
 "2023/high-reality.mdx": {
 	id: "2023/high-reality.mdx";
   slug: "2023/high-reality";
   body: string;
   collection: "releases";
-  data: any
+  data: InferEntrySchema<"releases">
 } & { render(): Render[".mdx"] };
 "2023/homesick.mdx": {
 	id: "2023/homesick.mdx";
   slug: "2023/homesick";
   body: string;
   collection: "releases";
-  data: any
+  data: InferEntrySchema<"releases">
 } & { render(): Render[".mdx"] };
 "2023/love-drips.mdx": {
 	id: "2023/love-drips.mdx";
   slug: "2023/love-drips";
   body: string;
   collection: "releases";
-  data: any
+  data: InferEntrySchema<"releases">
 } & { render(): Render[".mdx"] };
 "2023/menacing-rift.mdx": {
 	id: "2023/menacing-rift.mdx";
   slug: "2023/menacing-rift";
   body: string;
   collection: "releases";
-  data: any
+  data: InferEntrySchema<"releases">
 } & { render(): Render[".mdx"] };
 "2023/midnight-drive.mdx": {
 	id: "2023/midnight-drive.mdx";
   slug: "2023/midnight-drive";
   body: string;
   collection: "releases";
-  data: any
+  data: InferEntrySchema<"releases">
 } & { render(): Render[".mdx"] };
 "2023/path-to-_.mdx": {
 	id: "2023/path-to-_.mdx";
   slug: "2023/path-to-_";
   body: string;
   collection: "releases";
-  data: any
+  data: InferEntrySchema<"releases">
 } & { render(): Render[".mdx"] };
 "2023/poly.mdx": {
 	id: "2023/poly.mdx";
   slug: "2023/poly";
   body: string;
   collection: "releases";
-  data: any
+  data: InferEntrySchema<"releases">
 } & { render(): Render[".mdx"] };
 "2023/preserved.mdx": {
 	id: "2023/preserved.mdx";
   slug: "2023/preserved";
   body: string;
   collection: "releases";
-  data: any
+  data: InferEntrySchema<"releases">
 } & { render(): Render[".mdx"] };
 "2023/smash.mdx": {
 	id: "2023/smash.mdx";
   slug: "2023/smash";
   body: string;
   collection: "releases";
-  data: any
+  data: InferEntrySchema<"releases">
 } & { render(): Render[".mdx"] };
 "2023/turbine.mdx": {
 	id: "2023/turbine.mdx";
   slug: "2023/turbine";
   body: string;
   collection: "releases";
-  data: any
+  data: InferEntrySchema<"releases">
 } & { render(): Render[".mdx"] };
 "2024/artificial.mdx": {
 	id: "2024/artificial.mdx";
   slug: "2024/artificial";
   body: string;
   collection: "releases";
-  data: any
+  data: InferEntrySchema<"releases">
 } & { render(): Render[".mdx"] };
 "2024/fancy-spring.mdx": {
 	id: "2024/fancy-spring.mdx";
   slug: "2024/fancy-spring";
   body: string;
   collection: "releases";
-  data: any
+  data: InferEntrySchema<"releases">
+} & { render(): Render[".mdx"] };
+"2024/feelin-it.mdx": {
+	id: "2024/feelin-it.mdx";
+  slug: "2024/feelin-it";
+  body: string;
+  collection: "releases";
+  data: InferEntrySchema<"releases">
 } & { render(): Render[".mdx"] };
 "2024/menacing-rift-ucalyptus.mdx": {
 	id: "2024/menacing-rift-ucalyptus.mdx";
   slug: "2024/menacing-rift-ucalyptus";
   body: string;
   collection: "releases";
-  data: any
+  data: InferEntrySchema<"releases">
 } & { render(): Render[".mdx"] };
 "2024/move-on.mdx": {
 	id: "2024/move-on.mdx";
   slug: "2024/move-on";
   body: string;
   collection: "releases";
-  data: any
+  data: InferEntrySchema<"releases">
 } & { render(): Render[".mdx"] };
 "2024/ringmoth.mdx": {
 	id: "2024/ringmoth.mdx";
   slug: "2024/ringmoth";
   body: string;
   collection: "releases";
-  data: any
+  data: InferEntrySchema<"releases">
 } & { render(): Render[".mdx"] };
 "2024/sahara-sunrise.mdx": {
 	id: "2024/sahara-sunrise.mdx";
   slug: "2024/sahara-sunrise";
   body: string;
   collection: "releases";
-  data: any
+  data: InferEntrySchema<"releases">
 } & { render(): Render[".mdx"] };
 "2024/seraphim_files.mdx": {
 	id: "2024/seraphim_files.mdx";
   slug: "2024/seraphim_files";
   body: string;
   collection: "releases";
-  data: any
+  data: InferEntrySchema<"releases">
 } & { render(): Render[".mdx"] };
 "2024/when-i-care.mdx": {
 	id: "2024/when-i-care.mdx";
   slug: "2024/when-i-care";
   body: string;
   collection: "releases";
-  data: any
+  data: InferEntrySchema<"releases">
 } & { render(): Render[".mdx"] };
 };
 
@@ -495,5 +502,5 @@ declare module 'astro:content' {
 
 	type AnyEntryMap = ContentEntryMap & DataEntryMap;
 
-	export type ContentConfig = never;
+	export type ContentConfig = typeof import("../src/content/config.js");
 }
