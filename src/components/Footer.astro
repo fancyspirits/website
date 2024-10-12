@@ -3,7 +3,7 @@ const year = new Date().getFullYear();
 ---
 <footer>
     <span>&copy; {year} Fancy Spirits</span>
-    <a href="/impressum">Impressum | Privacy Policy</a>
+    <a href="/impressum">Imprint | Privacy Policy</a>
 </footer>
 <style>
     footer {
@@ -18,10 +18,12 @@ const year = new Date().getFullYear();
         left: 0;
         right: 0;
         font-size: 0.8em;
-        margin-top: 19rem;
-        /* TODO: Remove */
-        position: fixed;
+        /* margin-top: 19rem; */
     }
+
+    main {
+            flex: 1; /* This allows the main content to expand to fill remaining space */
+        }
 
     @media screen and (max-width: 800px) {
         footer {
